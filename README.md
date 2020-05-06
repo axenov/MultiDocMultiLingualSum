@@ -1,6 +1,8 @@
 **To do:**
-- [ ] look in detail Wikinews
-- [ ] search other multi-lingual source of summaries
+- [x] look in detail Wikinews\
+*Some sources for french articles are in English*
+- [x] search other multi-lingual source of summaries\
+*I didn't found anything which looks better than Wikinews*
 - [ ] begin scraping
 
 # Multi-Document Multi-Lingual Summarization
