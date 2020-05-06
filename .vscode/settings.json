@@ -1,0 +1,4 @@
+{
+    "python.pythonPath": "/home/airklizz/nlp/bin/python",
+    "markdownlint.run": "onSave"
+}
