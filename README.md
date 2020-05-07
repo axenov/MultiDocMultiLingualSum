@@ -26,7 +26,7 @@ To create ``data.jsonl`` run:
 
 ```
 cd data/
-python create_data --wiki_dump_path WIKI_DUMP_PATH --max_doc_count MAX_DOC_COUNT --data_path DATA_PATH
+python data/create_data.py --wiki_dump_path WIKI_DUMP_PATH --max_doc_count MAX_DOC_COUNT --data_path DATA_PATH
 cd ../
 ```
 
