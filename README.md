@@ -2,7 +2,7 @@
 
 ## Prepare dataset
 
-Tested only for german Wikinews for the moment.
+Tested only for german Wikinews.
 
 ### Download Wikinews dump
 
@@ -35,6 +35,22 @@ cd ../
 > The text cleaning is not perfect : the main function to clean the text is ``filter_wiki`` and I noticed few bad cleaning. Run ``python data/failures.py`` for see one example.
 
 ### Stats
+
+
+#### English Wikinews
+
+|      |    num_words |  num_sources |
+| ---- | ------------ | ------------ |
+|count | 16616 | 16616 |
+|mean  |   304.3 |     3.0 |
+|std   |   290.5 |     2.5 |
+|min   |     1 |     1 |
+|25%   |   170 |     2 |
+|50%   |   242 |     3 |
+|75%   |   355 |     4 |
+|max   | 11629 |    52 |
+
+#### German Wikinews
 
 |      |    num_words |  num_sources |
 | ---- | ------------ | ------------ |
