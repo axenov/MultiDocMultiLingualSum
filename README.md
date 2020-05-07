@@ -1,15 +1,57 @@
-**To do:**
-- [x] look in detail Wikinews\
-*Some sources for french articles are in English*
-- [x] search other multi-lingual source of summaries\
-*I didn't found anything which looks better than Wikinews*
-- [ ] begin scraping
-
 # Multi-Document Multi-Lingual Summarization
 
-## Scraping
+## Prepare dataset
 
-Infos relative to scraping of Wikinews
+Tested only for german Wikinews for the moment.
+
+### Download Wikinews dump
+
+To download the german Wikinews dump run:
+
+```
+cd dumps/
+wget https://dumps.wikimedia.org/dewikinews/latest/dewikinews-latest-pages-meta-current.xml.bz2
+cd ../
+```
+
+### Create ``data.jsonl``
+
+``data.jsonl`` contains one article per line stored in json format as follows:
+
+```
+{"title": title of the article, "text": list of paragraphs, "categories": list of categories, "sources": list of sources}
+```
+
+To create ``data.jsonl`` run:
+
+```
+cd data/
+python create_data --wiki_dump_path WIKI_DUMP_PATH --max_doc_count MAX_DOC_COUNT --data_path DATA_PATH
+cd ../
+```
+
+> Remarks: \
+> The sources extraction is not perfect : links to an another Wikinews article are not taken, the domain url is sometimes present.\
+> The text cleaning is not perfect : the main function to clean the text is ``filter_wiki`` and I noticed few bad cleaning. Run ``python data/failures.py`` for see one example.
+
+### Stats
+
+|      |    num_words |  num_sources |
+| ---- | ------------ | ------------ |
+|count | 13454 | 13454 |
+|mean  |   220.4 |     2.8 |
+|std   |   179.1 |     2.0 |
+|min   |    11 |     1 |
+|25%   |   114 |     1 |
+|50%   |   174 |     2 |
+|75%   |   269 |     4 |
+|max   |  2713 |    25 |
+
+To reproduce run: ``python data/stats.py``
+
+### Explore dataset 
+
+To see example of the dataset run: ``python data/display.py``
 
 ## Related Work
 
