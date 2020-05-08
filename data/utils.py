@@ -32,6 +32,10 @@ def get_pages_from_wiki_dump(wiki_dump_path, max_doc_count=0):
     with open(wiki_dump_path, 'rb') as xml_fileobj:
         page_xmls = extract_page_xmls(xml_fileobj)
         i = 0
+        wrong_ns = 0
+        no_sources = 0
+        no_text = 0
+        redirect = 0
 
         docs = []
 
@@ -49,6 +53,7 @@ def get_pages_from_wiki_dump(wiki_dump_path, max_doc_count=0):
             text = elem.find(text_path).text
             ns = elem.find(ns_path).text
             if ns not in filter_namespaces:
+                wrong_ns += 1
                 continue
 
             try:
@@ -56,18 +61,22 @@ def get_pages_from_wiki_dump(wiki_dump_path, max_doc_count=0):
                 categories = [c for _, c in category_pattern.findall(text)]
 
                 sources = find_sources(text, sources_translations, footnote_pattern, url_pattern)
-                if sources == [] :
-                    continue
-                
+                                
                 cleaned_text = category_pattern.sub('', text)
                 cleaned_text = footnote_pattern.sub('', cleaned_text)
                 cleaned_text = filter_wiki(cleaned_text)
                 passages = [passage for passage in cleaned_text.split('\n\n') if blank_pattern.match(passage) == None]
 
                 if len(' '.join(passages).split()) == 0:
+                    no_text += 1
                     continue
                 
                 if '#REDIRECT' in cleaned_text or '#redirect' in cleaned_text:
+                    redirect += 1
+                    continue
+
+                if sources == [] :
+                    no_sources += 1
                     continue
 
                 docs.append({
@@ -81,6 +90,15 @@ def get_pages_from_wiki_dump(wiki_dump_path, max_doc_count=0):
                     break
             except (TypeError, ValueError) as e:
                 logger.error(f'Cannot read page #{i} - {title}: {e}')
+
+    print('Pages read: {}\nPages returned: {}\nWrong namespace: {}\nNo sources: {}\nNo text: {}\nRedirect: {}'.format(
+                    i+1,
+                    len(docs),
+                    wrong_ns,
+                    no_sources,
+                    no_text,
+                    redirect
+                ))
 
     return docs
 
