@@ -9,30 +9,31 @@ Tested only for german Wikinews.
 To download the german Wikinews dump run:
 
 ```
-cd dumps/
+cd dataset/wikinews/dumps/
 wget https://dumps.wikimedia.org/dewikinews/latest/dewikinews-latest-pages-meta-current.xml.bz2
 cd ../
 ```
 
-### Create ``data.jsonl``
+### Create json files
 
-``data.jsonl`` contains one article per line stored in json format as follows:
+Json files contain one article stored in json format as follows:
 
 ```
 {"title": title of the article, "text": list of paragraphs, "categories": list of categories, "sources": list of sources}
 ```
 
-To create ``data.jsonl`` run:
+To create the json files run:
 
 ```
-cd data/
-python data/create_data.py --wiki_dump_path WIKI_DUMP_PATH --max_doc_count MAX_DOC_COUNT --data_path DATA_PATH
-cd ../
+python dataset/wikinews/create_data.py --wiki_dump_path WIKI_DUMP_PATH \
+                                        --max_doc_count MAX_DOC_COUNT \
+                                        --index_path INDEX_PATH \
+                                        --json_path JSON_PATH
 ```
 
 > Remarks: \
 > The sources extraction is not perfect : links to an another Wikinews article are not taken, the domain url is sometimes present.\
-> The text cleaning is not perfect : the main function to clean the text is ``filter_wiki`` and I noticed few bad cleaning. Run ``python data/failures.py`` for see one example.
+> The text cleaning is not perfect : the main function to clean the text is ``filter_wiki`` and I noticed few bad cleaning. Run ``python dataset/wikinews/failures.py`` for see one example.
 
 |        | German | English | French |
 | --- | --- | --- | --- |
@@ -45,7 +46,7 @@ cd ../
 
 ### Stats
 
-To reproduce run: ``python data/stats.py --data_path DATA_PATH ``
+To reproduce run: ``python dataset/wikinews/stats.py --data_path DATA_PATH ``
 
 #### English Wikinews
 
@@ -72,10 +73,6 @@ To reproduce run: ``python data/stats.py --data_path DATA_PATH ``
 |50%   |   174 |     2 |
 |75%   |   269 |     4 |
 |max   |  2713 |    25 |
-
-### Explore dataset 
-
-To see example of the dataset run: ``python data/display.py --data_path DATA_PATH``
 
 ## Related Work
 
