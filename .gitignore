@@ -1,0 +1,13 @@
+# __pycache__
+__pycache__/*
+dataset/__pycache__/*
+dataset/wikinews/__pycache__/*
+dataset/sources/__pycache__/*
+
+# csv
+*.csv
+
+
+dataset_tree.txt
+
+
