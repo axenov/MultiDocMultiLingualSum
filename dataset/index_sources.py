@@ -4,8 +4,8 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("--wikinews_json_path", help='Path to the wikinews json folder', type=str, default='dataset/wikinews/json.de')
 parser.add_argument("--index_path", help='Path to the index file', type=str, default='dataset/sources/index/de.sources.index')
-parser.add_argument("--html_path", help='Path to the html folder', type=str, default='dataset/sources/html')
-parser.add_argument("--json_path", help='Path to the json folder', type=str, default='dataset/sources/json')
+parser.add_argument("--html_path", help='Path to the html folder', type=str, default='dataset/sources/html.de')
+parser.add_argument("--json_path", help='Path to the json folder', type=str, default='dataset/sources/json.de')
 
 args = parser.parse_args()
 
