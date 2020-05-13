@@ -49,6 +49,9 @@ def extract(html):
     except newspaper.article.ArticleException as e:
         print(e)
         return {}
+    except ValueError as e:
+        print(e)
+        return {}
     return {
                 'title': article.title,
                 'maintext': article.maintext,
