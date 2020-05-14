@@ -1,4 +1,4 @@
-from utils import index_sources
+from utils_index_sources import index_sources
 import argparse
 import os
 import asyncio
