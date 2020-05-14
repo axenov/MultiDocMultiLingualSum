@@ -10,4 +10,6 @@ dataset/sources/__pycache__/*
 
 dataset_tree.txt
 
+*.log
+
 
