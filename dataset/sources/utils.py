@@ -49,15 +49,17 @@ class Library():
             for line in f:
                 elems = line.split('\t')
                 if len(elems) != 4: continue
-                self.url2id[elems[0]] = elems[3]
+                self.url2id[elems[0]] = elems[3][:-1]
 
         self.json_template = json_path + '/{}.json'
         self.html_template = html_path + '/{}.html'
     
     def get_json(self, url):
-        with open(self.json_template(self.url2id(url)), 'r') as json_file:
-            return json.load(json_file)
+        with open(self.json_template.format(self.url2id[url]), 'r') as json_file:
+            doc = json.load(json_file)
+        return doc
 
     def get_html(self, url):
-        with open(self.html_template(self.url2id(url)), 'r') as f:
-            return f.read()
+        with open(self.html_template.format(self.url2id[url]), 'r') as f:
+            html = f.read()
+        return html
