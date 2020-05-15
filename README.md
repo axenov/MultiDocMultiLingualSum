@@ -59,7 +59,7 @@ python dataset/wikinews/create_data.py --wiki_dump_path 'dataset/wikinews/dumps/
 Extract html and content from source urls of Wikinews articles. The script uses the [archive](https://web.archive.org/) version of the page if it exists otherwise it archives the page.
 
 ```
-python dataset/index_sources.py -wikinews_json_path 'dataset/wikinews/json.en' \
+python dataset/index_sources.py --wikinews_json_path 'dataset/wikinews/json.en' \
                                 --index_path 'dataset/sources/index/en.sources.index' \
                                 --html_path 'dataset/sources/html.de' \
                                 --json_path 'dataset/sources/json.de' \
