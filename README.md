@@ -25,10 +25,10 @@ Json files contain one article stored in json format as follows:
 
 ```json
 {
-  "title": title of the article, 
-  "text": list of paragraphs, 
-  "categories": ['categorie 1', 'categorie 2', ...] ,
-  "sources": ['sources 1', 'sources 2', ...] 
+  "title": "title of the article", 
+  "text": "list of paragraphs", 
+  "categories": ["categorie 1", "categorie 2", "..."] ,
+  "sources": ["sources 1", "sources 2", "..."] 
 }
 ```
 
