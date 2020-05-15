@@ -2,7 +2,12 @@
 
 ## Prepare dataset
 
-Tested only for german Wikinews.
+### Clone repository 
+
+```
+git clone git clone https://github.com/airKlizz/MultiDocMultiLingualSum
+cd MultiDocMultiLingualSum/
+```
 
 ### Download Wikinews dump
 
@@ -10,29 +15,34 @@ To download the german Wikinews dump run:
 
 ```
 cd dataset/wikinews/dumps/
-wget https://dumps.wikimedia.org/dewikinews/latest/dewikinews-latest-pages-meta-current.xml.bz2
-cd ../
+wget https://dumps.wikimedia.org/enwikinews/latest/enwikinews-latest-pages-meta-current.xml.bz2
+cd ../../..
 ```
 
 ### Create json files
 
 Json files contain one article stored in json format as follows:
 
-```
-{"title": title of the article, "text": list of paragraphs, "categories": list of categories, "sources": list of sources}
+```json
+{
+  "title": title of the article, 
+  "text": list of paragraphs, 
+  "categories": ['categorie 1', 'categorie 2', ...] ,
+  "sources": ['sources 1', 'sources 2', ...] 
+}
 ```
 
 To create the json files run:
 
 ```
-python dataset/wikinews/create_data.py --wiki_dump_path WIKI_DUMP_PATH \
-                                        --max_doc_count MAX_DOC_COUNT \
-                                        --index_path INDEX_PATH \
-                                        --json_path JSON_PATH
+python dataset/wikinews/create_data.py --wiki_dump_path 'dataset/wikinews/dumps/enwikinews-latest-pages-meta-current.xml.bz2' \
+                                        --max_doc_count 0 \
+                                        --index_path 'dataset/wikinews/index/en.wikinews.index' \
+                                        --json_path 'dataset/wikinews/json.en/'
 ```
 
 > Remarks: \
-> The sources extraction is not perfect : links to an another Wikinews article are not taken, the domain url is sometimes present.\
+> The sources extraction is not perfect : links to an another Wikinews article are not taken.\
 > The text cleaning is not perfect : the main function to clean the text is ``filter_wiki`` and I noticed few bad cleaning. Run ``python dataset/wikinews/failures.py`` for see one example.
 
 |        | German | English | French |
@@ -43,6 +53,19 @@ python dataset/wikinews/create_data.py --wiki_dump_path WIKI_DUMP_PATH \
 |No sources | 676 | 5742 | xxx |
 |No text | 2 | 36 | xxx |
 |Redirect | 5 | 19931 | xxx |
+
+### Index sources
+
+Extract html and content from source urls of Wikinews articles. The script uses the [archive](https://web.archive.org/) version of the page if it exists otherwise it archives the page.
+
+```
+python dataset/index_sources.py -wikinews_json_path 'dataset/wikinews/json.en' \
+                                --index_path 'dataset/sources/index/en.sources.index' \
+                                --html_path 'dataset/sources/html.de' \
+                                --json_path 'dataset/sources/json.de' \
+                                --max_url_count -1 \
+                                --max_workers 10
+```
 
 ### Stats
 
@@ -60,19 +83,6 @@ To reproduce run: ``python dataset/wikinews/stats.py --data_path DATA_PATH ``
 |50%   |   242 |     3 |
 |75%   |   355 |     4 |
 |max   | 11629 |    52 |
-
-#### German Wikinews
-
-|      |    num_words |  num_sources |
-| ---- | ------------ | ------------ |
-|count | 13454 | 13454 |
-|mean  |   220.4 |     2.8 |
-|std   |   179.1 |     2.0 |
-|min   |    11 |     1 |
-|25%   |   114 |     1 |
-|50%   |   174 |     2 |
-|75%   |   269 |     4 |
-|max   |  2713 |    25 |
 
 ## Related Work
 
@@ -112,6 +122,8 @@ Great results on CNN-DM.
 Great results on CNN-DM.
 * [Text Summarization with Pretrained Encoders](https://arxiv.org/pdf/1908.08345.pdf) | [github](https://github.com/nlpyang/PreSumm)\
 Use BERT as encoder and a non-trained decoder. Two optimizers to avoid overfitting of BERT.
+* [Transforming Wikipedia into Augmented Datafor Query-Focused Summarization](https://arxiv.org/pdf/1911.03324.pdf)\
+/|Extractive summarization|\] Use Bert for topic based summary.
 
 ### Evaluation
 
