@@ -1,5 +1,7 @@
 # Dataset preparation
 
+The following commands are to create the english dataset. To create the german one, run the same commands with removing all 'en' by 'de'.
+
 ## Clone repository 
 
 ```
