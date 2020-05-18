@@ -1,5 +1,21 @@
 # Multi-Document Multi-Lingual Summarization
 
+## Load dataset
+
+See ``dataset/README.md`` for more details. 
+
+Load the dataset using [huggingface nlp library](https://github.com/huggingface/nlp):
+
+```python
+from nlp import load_dataset
+
+dataset = load_dataset('en_wiki_multi_news.py', cache_dir='dataset/.en-wiki-multi-news-cache')
+
+train_dataset = dataset['train']
+validation_dataset = dataset['validation']
+test_dataset = dataset['test']
+```
+
 ## Related Work
 
 ### English Multi Document Summarization
