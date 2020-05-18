@@ -109,3 +109,19 @@ train_dataset = dataset['train']
 validation_dataset = dataset['validation']
 test_dataset = dataset['test']
 ```
+
+## Stats
+
+|       | mean | min | max | variance |
+| --- | --- | --- | --- | --- |
+| rouge1 P | 0.341 | 0.047 | 0.644 | 0.035 |
+| rouge1 R | 0.761 | 0.385 | 0.967 | 0.027 |
+| rouge1 F | 0.432 | 0.089 | 0.718 | 0.037 |
+| rouge2 P | 0.183 | 0.031 | 0.493 | 0.023 |
+| rouge2 R | 0.401 | 0.088 | 0.829 | 0.036 |
+| rouge2 F | 0.231 | 0.057 | 0.618 | 0.029 |
+| rougeL P | 0.204 | 0.034 | 0.498 | 0.025 |
+| rougeL R | 0.439 | 0.175 | 0.838 | 0.031 |
+| rougeL F | 0.255 | 0.063 | 0.625 | 0.029 |
+| number of sources | 1.000 | 1.000 | 1.000 | 0.000 |
+| summary's number of words | 1568.318 | 171.000 | 8554.000 | 4242442.037 |

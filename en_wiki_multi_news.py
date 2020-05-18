@@ -14,7 +14,7 @@
 # limitations under the License.
 
 # Lint as: python3
-"""De Wiki Multi News dataset."""
+"""En Wiki Multi News dataset."""
 
 from __future__ import absolute_import, division, print_function
 
@@ -30,10 +30,10 @@ DFKI
 """
 
 _DESCRIPTION = """
-German Wikinews dataset
+English Wikinews dataset
 """
 
-_PATH = "dataset/de-wiki-multi-news/"
+_URL = "https://drive.google.com/uc?export=download&id=1Vl-p342bUw4RutP4It_RGjp9XgBjQhaz"
 
 _TITLE = "title"
 _DOCUMENT = "document"
@@ -57,7 +57,7 @@ class MultiNews(nlp.GeneratorBasedBuilder):
 
     def _split_generators(self, dl_manager):
         """Returns SplitGenerators."""
-        data_path = _PATH
+        data_path = dl_manager.download_and_extract(_URL)
         return [
             nlp.SplitGenerator(name=nlp.Split.TRAIN, gen_kwargs={"path": os.path.join(data_path, "train.jsonl")},),
             nlp.SplitGenerator(name=nlp.Split.VALIDATION, gen_kwargs={"path": os.path.join(data_path, "validation.jsonl")},),

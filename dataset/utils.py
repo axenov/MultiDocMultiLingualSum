@@ -3,11 +3,16 @@ import pprint
 from rouge_score import rouge_scorer
 from random import choices
 import pandas as pd
+import numpy as np
+from scipy import stats as scipy_stats
 from sklearn.model_selection import train_test_split
+from nltk.tokenize import word_tokenize
 
 from sources.utils import Library
 
 from tqdm import tqdm
+
+from nlp import load_dataset
 
 def get_wikinews(ids, wikinews_json_path, sources_index_path, sources_json_path, sources_html_path):
 
@@ -167,17 +172,89 @@ def get_ids(wikinews_index_path, num=-1):
     
     return choices(ids, k=num)
     
-def rouge_stats(wikinews_index_path, wikinews_json_path, sources_index_path, sources_json_path, sources_html_path):
-    ids = get_ids(wikinews_index_path)
-    docs = get_wikinews(ids, wikinews_json_path, sources_index_path, sources_json_path, sources_html_path)
+def stats(dataset_script_path, dataset_cache_path):
 
-    rouge1_recall = []
-    rouge2_recall = []
+    def list_stats(lst):
+        lst = np.array(lst)
+        d = scipy_stats.describe(lst)
+        return {'mean': d.mean,
+                'min': d.minmax[0],
+                'max': d.minmax[1],
+                'variance': d.variance}
 
-    for doc in docs:
-        rouge1_recall.append(doc['score']['rouge1'].recall)
-        rouge2_recall.append(doc['score']['rouge2'].recall)
+    
+    scorer = rouge_scorer.RougeScorer(['rouge1', 'rouge2', 'rougeL'], use_stemmer=True)
+    rouge_scores = {'rouge1': {'precision': [], 'recall': [], 'fmeasure': []},
+                    'rouge2': {'precision': [], 'recall': [], 'fmeasure': []},
+                    'rougeL': {'precision': [], 'recall': [], 'fmeasure': []}}
+    num_sources = []
+    sum_len = []
 
-    data = {'rouge1_recall': rouge1_recall, 'rouge2_recall': rouge2_recall}
-    df = pd.DataFrame(data=data)
-    print(df.describe())
+    def example_stats(example):
+
+        # Rouge score
+        rouge_score = scorer.score(example['summary'], example['document'])
+        rouge_scores['rouge1']['precision'].append(rouge_score['rouge1'].precision)
+        rouge_scores['rouge1']['recall'].append(rouge_score['rouge1'].recall)
+        rouge_scores['rouge1']['fmeasure'].append(rouge_score['rouge1'].fmeasure)
+        rouge_scores['rouge2']['precision'].append(rouge_score['rouge2'].precision)
+        rouge_scores['rouge2']['recall'].append(rouge_score['rouge2'].recall)
+        rouge_scores['rouge2']['fmeasure'].append(rouge_score['rouge2'].fmeasure)
+        rouge_scores['rougeL']['precision'].append(rouge_score['rougeL'].precision)
+        rouge_scores['rougeL']['recall'].append(rouge_score['rougeL'].recall)
+        rouge_scores['rougeL']['fmeasure'].append(rouge_score['rougeL'].fmeasure)
+
+        # Number of sources
+        num = example['document'].count('|||') + 1
+        num_sources.append(num)
+
+        # Summary length
+        sum_len.append(len(word_tokenize(example['summary'])))
+
+    dataset = load_dataset(dataset_script_path, cache_dir=dataset_cache_path, split='train+test+validation')
+
+    print(dataset)
+
+    dataset.map(example_stats)
+
+    print(len(num_sources), len(sum_len), len(rouge_scores['rouge1']['precision']))
+
+    # Mean
+    rouge_stats = {'rouge1': {'precision': list_stats(rouge_scores['rouge1']['precision']), 'recall': list_stats(rouge_scores['rouge1']['recall']), 'fmeasure': list_stats(rouge_scores['rouge1']['fmeasure'])},
+                    'rouge2': {'precision': list_stats(rouge_scores['rouge2']['precision']), 'recall': list_stats(rouge_scores['rouge2']['recall']), 'fmeasure': list_stats(rouge_scores['rouge2']['fmeasure'])},
+                    'rougeL': {'precision': list_stats(rouge_scores['rougeL']['precision']), 'recall': list_stats(rouge_scores['rougeL']['recall']), 'fmeasure': list_stats(rouge_scores['rougeL']['fmeasure'])}}
+    num_sources_stats = {'num_sources': list_stats(num_sources), '1 source': num_sources.count(1), '2 sources': num_sources.count(2), '3 sources': num_sources.count(3), 'More sources': len(num_sources) - num_sources.count(1) - num_sources.count(2) - num_sources.count(3)}
+    sum_len_stats = {'sum_len': list_stats(sum_len)}
+
+    all_stats = {
+        'rouge1 P': rouge_stats['rouge1']['precision'],
+        'rouge1 R': rouge_stats['rouge1']['recall'],
+        'rouge1 F': rouge_stats['rouge1']['fmeasure'],
+        'rouge2 P': rouge_stats['rouge2']['precision'],
+        'rouge2 R': rouge_stats['rouge2']['recall'],
+        'rouge2 F': rouge_stats['rouge2']['fmeasure'],
+        'rougeL P': rouge_stats['rougeL']['precision'],
+        'rougeL R': rouge_stats['rougeL']['recall'],
+        'rougeL F': rouge_stats['rougeL']['fmeasure'],
+        'number of sources': list_stats(num_sources),
+        'summary\'s number of words': list_stats(sum_len),
+    }
+
+    print('|       | mean | min | max | variance |')
+    print('| --- | --- | --- | --- | --- |')
+    for name, value in all_stats.items():
+        print('| {} | {:.3f} | {:.3f} | {:.3f} | {:.3f} |'.format(
+            name,
+            value['mean'],
+            value['min'],
+            value['max'],
+            value['variance']
+        ))
+    print()
+    print('Source with:\n- 1 source: {}\n- 2 sources: {}\n- 3 sources: {}\n- More sources: {}\n'.format(
+        num_sources_stats['1 source'],
+        num_sources_stats['2 sources'],
+        num_sources_stats['3 sources'],
+        num_sources_stats['More sources']
+    ))
+    return rouge_stats, num_sources_stats, sum_len_stats

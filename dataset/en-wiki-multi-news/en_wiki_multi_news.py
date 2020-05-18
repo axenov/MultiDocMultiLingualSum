@@ -71,6 +71,6 @@ class MultiNews(nlp.GeneratorBasedBuilder):
                 elem = json.loads(line)
                 yield i, {
                     _TITLE: elem['title'],
-                    _DOCUMENT: elem['summary'],
-                    _SUMMARY: elem['sources'],
+                    _DOCUMENT: elem['sources'],
+                    _SUMMARY: elem['summary'],
                 }
