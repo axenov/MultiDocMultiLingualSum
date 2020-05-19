@@ -136,6 +136,8 @@ Examples with:
 - 3 sources: 2607
 - More sources: 2629
 
+Run ``python dataset/stats.py`` to reproduce.
+
 | #toks | mean | min | max | variance |
 | ----- | ---- | --- | --- | -------- |
 | summary | 409.4 | 3 | 14214 | 154992 |
@@ -143,10 +145,7 @@ Examples with:
 
 2D Density plot:
 
-![Density of examples](plot_2d_density/2d_density.png)
+Normal            |  Zoom       | Super Zoom
+:-------------------------:|:-------------------------:|:-------------------------:
+![](plot_2d_density/2d_density.png) |  ![](plot_2d_density/2d_density_zoom.png) | ![](plot_2d_density/2d_density_super_zoom.png)
 
-![Zoom](plot_2d_density/2d_density_zoom.png)
-
-![Super zoom](plot_2d_density/2d_density_super_zoom.png)
-
-Run ``python dataset/stats.py`` to reproduce.
