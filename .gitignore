@@ -20,3 +20,5 @@ dataset/.en-wiki-multi-news-cache/
 
 *.lock
 
+extractive/*
+apply_extractive.py

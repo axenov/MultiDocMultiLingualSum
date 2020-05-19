@@ -114,6 +114,8 @@ test_dataset = dataset['test']
 
 ## Stats
 
+### English dataset
+
 |       | mean | min | max | variance |
 | --- | --- | --- | --- | --- |
 | rouge1 P | 0.251 | 0.002 | 1.000 | 0.027 |
@@ -128,10 +130,23 @@ test_dataset = dataset['test']
 | number of sources | 2.553 | 1.000 | 43.000 | 4.166 |
 | summary's number of words | 356.144 | 3.000 | 13281.000 | 117325.758 |
 
-Source with:
+Examples with:
 - 1 source: 4327
 - 2 sources: 4361
 - 3 sources: 2607
 - More sources: 2629
+
+| #toks | mean | min | max | variance |
+| ----- | ---- | --- | --- | -------- |
+| summary | 409.4 | 3 | 14214 | 154992 |
+| document | 2101.8 | 25 | 88444 | 12646568 |
+
+2D Density plot:
+
+![Density of examples](plot_2d_density/2d_density.png)
+
+![Zoom](plot_2d_density/2d_density_zoom.png)
+
+![Super zoom](plot_2d_density/2d_density_super_zoom.png)
 
 Run ``python dataset/stats.py`` to reproduce.
