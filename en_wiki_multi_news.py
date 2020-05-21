@@ -41,7 +41,7 @@ _SUMMARY = "summary"
 
 
 class MultiNews(nlp.GeneratorBasedBuilder):
-    """Multi-News dataset."""
+    """English Wiki-Multi-News dataset."""
 
     VERSION = nlp.Version("1.0.0")
 
