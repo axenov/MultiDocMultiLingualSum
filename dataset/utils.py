@@ -107,11 +107,10 @@ def store_docs(num, filename, wikinews_index_path, wikinews_json_path, sources_i
                 f.write('\n\n')
             f.write('======\n\n')
 
-def create_dataset(recall_threashold, language, dataset_path, wikinews_index_path, wikinews_json_path, sources_index_path, sources_json_path, sources_html_path):
+def create_dataset(recall_threashold, hard, language, dataset_path, wikinews_index_path, wikinews_json_path, sources_index_path, sources_json_path, sources_html_path):
     ids = get_ids(wikinews_index_path)
     docs = get_wikinews(ids, wikinews_json_path, sources_index_path, sources_json_path, sources_html_path)
     num_sources = []
-    rouge1_recall_scores = []
     dataset = []
 
     for doc in tqdm(docs, desc='Write dataset'):
@@ -122,14 +121,15 @@ def create_dataset(recall_threashold, language, dataset_path, wikinews_index_pat
             continue
         if len(sources) == 0:
             continue
+        if not is_clean(summary, '|||'.join(sources), len(doc['sources']), hard=hard):
+            continue
         num_sources.append(len(sources))
-        rouge1_recall_scores.append(doc['score']['rouge1'].recall)
         entry = {'title': title, 'summary': summary, 'sources': '|||'.join(sources)}
         dataset.append(entry)
 
     dataset_train, dataset_test = train_test_split(dataset, test_size=0.05, random_state=1)
 
-    dataset_train, dataset_val = train_test_split(dataset_train, test_size=0.052, random_state=1)
+    dataset_train, dataset_val = train_test_split(dataset_train, test_size=0.05/0.95, random_state=1)
 
     write_dataset(dataset_path, 'train', dataset_train)
     write_dataset(dataset_path, 'test', dataset_test)
@@ -143,6 +143,35 @@ def create_dataset(recall_threashold, language, dataset_path, wikinews_index_pat
         len(num_sources) - num_sources.count(1) - num_sources.count(2) - num_sources.count(3) - num_sources.count(4)
     ))
 
+'''
+take example of input and return True is the example is correct or False if it needs to be removed
+'''
+def is_clean(summary, sources, original_num_sources, hard):
+
+    summary_NoW = len(word_tokenize(summary))
+    document_NoW = len(word_tokenize(sources))
+    num_sources = len(sources.split('|||'))
+
+    # if summary is less than 1.5 times smaller than document
+    if 1.5 * summary_NoW > document_NoW:
+        return False
+
+    if not hard:
+        return True
+
+    # if summary is less than 2 times smaller than document
+    if 2 * summary_NoW > document_NoW:
+        return False
+    
+    # if summary or document larger than 4000 words
+    if summary_NoW > 4000 or document_NoW > 4000:
+        return False
+
+    # if more than half of sources was dead
+    if num_sources < 0.5 * original_num_sources:
+        return False
+
+    return True
 
 def write_dataset(dataset_path, type, dataset):
     with open(f'{dataset_path}/{type}.jsonl', 'w') as f:
@@ -258,3 +287,4 @@ def stats(dataset_script_path, dataset_cache_path):
         num_sources_stats['More sources']
     ))
     return rouge_stats, num_sources_stats, sum_len_stats
+
