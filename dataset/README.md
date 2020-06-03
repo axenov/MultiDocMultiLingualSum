@@ -25,16 +25,16 @@ Json files contain one article stored in json format as follows:
 
 ```json
 {
-  "title": "title of the article", 
-  "text": "list of paragraphs", 
-  "categories": ["categorie 1", "categorie 2", "..."] ,
-  "sources": ["sources 1", "sources 2", "..."] 
+  "title": "title of the article",
+  "text": "list of paragraphs",
+  "categories": ["categorie 1", "categorie 2", "..."],
+  "sources": ["sources 1", "sources 2", "..."]
 }
 ```
 
 To create the json files run:
 
-```
+```bash
 python dataset/wikinews/create_data.py --wiki_dump_path 'dataset/wikinews/dumps/enwikinews-latest-pages-meta-current.xml.bz2' \
                                         --max_doc_count 0 \
                                         --index_path 'dataset/wikinews/index/en.wikinews.index' \
@@ -58,7 +58,7 @@ python dataset/wikinews/create_data.py --wiki_dump_path 'dataset/wikinews/dumps/
 
 Extract html and content from source urls of Wikinews articles. The script uses the [archive](https://web.archive.org/) version of the page if it exists otherwise it archives the page.
 
-```
+```bash
 python dataset/index_sources.py --wikinews_json_path 'dataset/wikinews/json.en' \
                                 --index_path 'dataset/sources/index/en.sources.index' \
                                 --html_path 'dataset/sources/html' \
@@ -79,7 +79,7 @@ Link Wikinews articles with sources that have been indexed to create a dataset. 
 
 ```json
 {
-  "title": "title of the article", 
+  "title": "title of the article",
   "summary": "paragraphs1\tparagraphs2\t...",
   "sources": "sources 1|||sources 2|||..."
 }
@@ -87,9 +87,10 @@ Link Wikinews articles with sources that have been indexed to create a dataset. 
 
 To create the dataset, you have to run:
 
-```
+```bash
 python dataset/create_dataset.py --dataset_path "dataset/en-wiki-multi-news"\
                                 --recall_threashold 0.1\
+                                --hard True\
                                 --language "en"\
                                 --wikinews_index_path "dataset/wikinews/index/en.wikinews.index"\
                                 --wikinews_json_path "dataset/wikinews/json.en"\
@@ -98,7 +99,7 @@ python dataset/create_dataset.py --dataset_path "dataset/en-wiki-multi-news"\
                                 --sources_json_path "dataset/sources/json"
 ```
 
-## Use the dataset 
+## Use the dataset
 
 The easiest way to use the dataset is to load it using the [nlp](https://github.com/huggingface/nlp) library from [huggingface](https://huggingface.co/).
 
@@ -116,36 +117,6 @@ test_dataset = dataset['test']
 
 ### English dataset
 
-|       | mean | min | max | variance |
-| --- | --- | --- | --- | --- |
-| rouge1 P | 0.251 | 0.002 | 1.000 | 0.027 |
-| rouge1 R | 0.737 | 0.014 | 1.000 | 0.034 |
-| rouge1 F | 0.328 | 0.003 | 0.995 | 0.023 |
-| rouge2 P | 0.115 | 0.000 | 0.990 | 0.010 |
-| rouge2 R | 0.357 | 0.000 | 1.000 | 0.034 |
-| rouge2 F | 0.154 | 0.000 | 0.987 | 0.012 |
-| rougeL P | 0.134 | 0.001 | 0.993 | 0.011 |
-| rougeL R | 0.400 | 0.014 | 1.000 | 0.024 |
-| rougeL F | 0.175 | 0.002 | 0.990 | 0.010 |
-| number of sources | 2.553 | 1.000 | 43.000 | 4.166 |
-| summary's number of words | 356.144 | 3.000 | 13281.000 | 117325.758 |
+### German dataset
 
-Examples with:
-- 1 source: 4327
-- 2 sources: 4361
-- 3 sources: 2607
-- More sources: 2629
-
-Run ``python dataset/stats.py`` to reproduce.
-
-| #toks | mean | min | max | variance |
-| ----- | ---- | --- | --- | -------- |
-| summary | 409.4 | 3 | 14214 | 154992 |
-| document | 2101.8 | 25 | 88444 | 12646568 |
-
-2D Density plot:
-
-Normal            |  Zoom       | Super Zoom
-:-------------------------:|:-------------------------:|:-------------------------:
-![](plot_2d_density/2d_density.png) |  ![](plot_2d_density/2d_density_zoom.png) | ![](plot_2d_density/2d_density_super_zoom.png)
-
+### French dataset

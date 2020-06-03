@@ -33,7 +33,9 @@ _DESCRIPTION = """
 English Wikinews dataset
 """
 
-_URL = "https://drive.google.com/uc?export=download&id=1Vl-p342bUw4RutP4It_RGjp9XgBjQhaz"
+#_URL = "https://drive.google.com/uc?export=download&id=1DGnbUY9zwiThTdgUvVTSAvSVHoloCgun"
+
+_URL = "https://drive.google.com/uc?export=download&id=1VvhCPBCdeyP1Z-kBwVjfhU-K3HD40VHg"
 
 _TITLE = "title"
 _DOCUMENT = "document"
@@ -58,6 +60,8 @@ class MultiNews(nlp.GeneratorBasedBuilder):
     def _split_generators(self, dl_manager):
         """Returns SplitGenerators."""
         data_path = dl_manager.download_and_extract(_URL)
+        print(dl_manager)
+        print(data_path)
         return [
             nlp.SplitGenerator(name=nlp.Split.TRAIN, gen_kwargs={"path": os.path.join(data_path, "train.jsonl")},),
             nlp.SplitGenerator(name=nlp.Split.VALIDATION, gen_kwargs={"path": os.path.join(data_path, "validation.jsonl")},),

@@ -54,59 +54,6 @@ def get_wikinews(ids, wikinews_json_path, sources_index_path, sources_json_path,
 
     return docs
 
-def print_docs(docs):
-    for doc in docs:
-        title = doc['title']
-        text = ' '.join(doc['text'])
-        sources = doc['sources']
-        score = doc['score']
-        print('=== {} ===\n'.format(title))
-        print('ROUGE1 recall: {}'.format(score['rouge1'].recall))
-        print('ROUGE2 recall: {}\n'.format(score['rouge2'].recall))
-        print('--- summary ---\n')
-        pprint.pprint(text)
-        print('\n--- sources ---\n')
-        for i, source in enumerate(sources):
-            if source == {}: 
-                print('*** Source not available ***\n')
-                continue
-            source_title = source['title']
-            source_text = source['maintext']
-            source_score = source['score']
-            print('*** {} ***\n'.format(source_title))
-            print('ROUGE1 recall: {}\n'.format(source_score['rouge1'].recall))
-            pprint.pprint(source_text)
-            print()
-        print('======\n\n')
-
-def store_docs(num, filename, wikinews_index_path, wikinews_json_path, sources_index_path, sources_json_path, sources_html_path):
-    ids = get_ids(wikinews_index_path, num)
-    docs = get_wikinews(ids, wikinews_json_path, sources_index_path, sources_json_path, sources_html_path)
-    with open(filename, 'w') as f:
-        for doc in docs:
-            title = doc['title']
-            text = ' '.join(doc['text'])
-            sources = doc['sources']
-            score = doc['score']
-            f.write('=== {} ===\n\n'.format(title))
-            f.write('ROUGE1 recall: {}\n'.format(score['rouge1'].recall))
-            f.write('ROUGE2 recall: {}\n\n'.format(score['rouge2'].recall))
-            f.write('--- summary ---\n\n')
-            f.write(text)
-            f.write('\n\n--- sources ---\n\n')
-            for i, source in enumerate(sources):
-                if source == {}: 
-                    f.write('*** Source not available ***\n\n')
-                    continue
-                source_title = str(source['title'])
-                source_text = str(source['maintext'])
-                source_score = source['score']
-                f.write('*** {} ***\n\n'.format(source_title))
-                f.write('ROUGE1 recall: {}\n\n'.format(source_score['rouge1'].recall))
-                f.write(source_text)
-                f.write('\n\n')
-            f.write('======\n\n')
-
 def create_dataset(recall_threashold, hard, language, dataset_path, wikinews_index_path, wikinews_json_path, sources_index_path, sources_json_path, sources_html_path):
     ids = get_ids(wikinews_index_path)
     docs = get_wikinews(ids, wikinews_json_path, sources_index_path, sources_json_path, sources_html_path)
