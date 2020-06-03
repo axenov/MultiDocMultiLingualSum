@@ -33,7 +33,9 @@ _DESCRIPTION = """
 English Wikinews dataset
 """
 
-_URL = "https://drive.google.com/uc?export=download&id=1DGnbUY9zwiThTdgUvVTSAvSVHoloCgun"
+_URL = (
+    "https://drive.google.com/uc?export=download&id=1DGnbUY9zwiThTdgUvVTSAvSVHoloCgun"
+)
 
 _TITLE = "title"
 _DOCUMENT = "document"
@@ -48,8 +50,14 @@ class MultiNews(nlp.GeneratorBasedBuilder):
     def _info(self):
         info = nlp.DatasetInfo(
             description=_DESCRIPTION,
-            features=nlp.Features({_TITLE: nlp.Value("string"), _DOCUMENT: nlp.Value("string"), _SUMMARY: nlp.Value("string")}),
-            #supervised_keys=(_TITLE, _DOCUMENT, _SUMMARY),
+            features=nlp.Features(
+                {
+                    _TITLE: nlp.Value("string"),
+                    _DOCUMENT: nlp.Value("string"),
+                    _SUMMARY: nlp.Value("string"),
+                }
+            ),
+            # supervised_keys=(_TITLE, _DOCUMENT, _SUMMARY),
             homepage="https://github.com/airKlizz/MultiDocMultiLingualSum",
             citation=_CITATION,
         )
@@ -59,9 +67,18 @@ class MultiNews(nlp.GeneratorBasedBuilder):
         """Returns SplitGenerators."""
         data_path = dl_manager.download_and_extract(_URL)
         return [
-            nlp.SplitGenerator(name=nlp.Split.TRAIN, gen_kwargs={"path": os.path.join(data_path, "train.jsonl")},),
-            nlp.SplitGenerator(name=nlp.Split.VALIDATION, gen_kwargs={"path": os.path.join(data_path, "validation.jsonl")},),
-            nlp.SplitGenerator(name=nlp.Split.TEST, gen_kwargs={"path": os.path.join(data_path, "test.jsonl")},),
+            nlp.SplitGenerator(
+                name=nlp.Split.TRAIN,
+                gen_kwargs={"path": os.path.join(data_path, "train.jsonl")},
+            ),
+            nlp.SplitGenerator(
+                name=nlp.Split.VALIDATION,
+                gen_kwargs={"path": os.path.join(data_path, "validation.jsonl")},
+            ),
+            nlp.SplitGenerator(
+                name=nlp.Split.TEST,
+                gen_kwargs={"path": os.path.join(data_path, "test.jsonl")},
+            ),
         ]
 
     def _generate_examples(self, path=None):
@@ -70,7 +87,7 @@ class MultiNews(nlp.GeneratorBasedBuilder):
             for i, line in enumerate(f):
                 elem = json.loads(line)
                 yield i, {
-                    _TITLE: elem['title'],
-                    _DOCUMENT: elem['sources'],
-                    _SUMMARY: elem['summary'],
+                    _TITLE: elem["title"],
+                    _DOCUMENT: elem["sources"],
+                    _SUMMARY: elem["summary"],
                 }
