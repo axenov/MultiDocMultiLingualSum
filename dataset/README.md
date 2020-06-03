@@ -101,17 +101,7 @@ python dataset/create_dataset.py --dataset_path "dataset/en-wiki-multi-news"\
 
 ## Use the dataset
 
-The easiest way to use the dataset is to load it using the [nlp](https://github.com/huggingface/nlp) library from [huggingface](https://huggingface.co/).
-
-```python
-from nlp import load_dataset
-
-dataset = load_dataset('dataset/en-wiki-multi-news/en_wiki_multi_news.py', cache_dir='dataset/.en-wiki-multi-news-cache')
-
-train_dataset = dataset['train']
-validation_dataset = dataset['validation']
-test_dataset = dataset['test']
-```
+The easiest way to use the dataset is to load it using the [nlp](https://github.com/huggingface/nlp) library from [huggingface](https://huggingface.co/). You can see the script ``../en_wiki_multi_news.py`` for an example.
 
 ## Stats
 
