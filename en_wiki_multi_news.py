@@ -33,8 +33,6 @@ _DESCRIPTION = """
 English Wikinews dataset
 """
 
-# _URL = "https://drive.google.com/uc?export=download&id=1DGnbUY9zwiThTdgUvVTSAvSVHoloCgun"
-
 _URL = (
     "https://drive.google.com/uc?export=download&id=1VvhCPBCdeyP1Z-kBwVjfhU-K3HD40VHg"
 )

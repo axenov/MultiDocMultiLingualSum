@@ -243,4 +243,42 @@ def stats(dataset_script_path, dataset_cache_path):
         rouge_types=["rouge1", "rouge2", "rougeL", "rougeLsum"]
     )
 
+    # Print number of examples
+    print(f"The dataset contains {len(dataset)} examples.")
+
+    # Print number of sources stats
+    num_sources = dataset["num_sources"]
+    print(
+        "number of article with:\n - 1 source: {}\n - 2 sources: {}\n - 3 sources: {}\n - 4 sources: {}\n - more sources: {}".format(
+            num_sources.count(1),
+            num_sources.count(2),
+            num_sources.count(3),
+            num_sources.count(4),
+            len(num_sources)
+            - num_sources.count(1)
+            - num_sources.count(2)
+            - num_sources.count(3)
+            - num_sources.count(4),
+        )
+    )
+
+    # Print length stats
+    print(
+        "number of words in document:\t{}\nnumber of sentences in document:\t{}\nnumber of words in summary:\t{}\nnumber of sentences in summary:\t{}\n".format(
+            np.mean(dataset["doc_num_words"]),
+            np.mean(dataset["doc_num_sentences"]),
+            np.mean(dataset["sum_num_words"]),
+            np.mean(dataset["sum_num_sentences"]),
+        )
+    )
+
+    # Print ROUGE stats
+    print(
+        "Rouge-1 R:\t{}\nRouge-2 R:\t{}\nRouge-L R:\t{}\nRouge-Lsum R:\t{}\n".format(
+            rouge_stats['rouge1'].mid.recall,
+            rouge_stats['rouge2'].mid.recall,
+            rouge_stats['rougeL'].mid.recall,
+            rouge_stats['rougeLsum'].mid.recall,
+        )
+    )
     return None
