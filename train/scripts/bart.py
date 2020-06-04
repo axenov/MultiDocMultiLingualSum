@@ -3,7 +3,7 @@ from scripts.summarization_trainer import SummarizationTrainer
 from transformers import BartForConditionalGeneration, BartTokenizer
 
 
-class T5SummarizationTrainer(SummarizationTrainer):
+class BartSummarizationTrainer(SummarizationTrainer):
     def __init__(
         self,
         model_name_or_path,
