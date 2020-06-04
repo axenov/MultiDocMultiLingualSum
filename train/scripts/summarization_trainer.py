@@ -293,7 +293,6 @@ class DatasetArguments:
     version: Optional[str] = field(default=None)
     data_dir: Optional[str] = field(default=None)
     data_files: Union[Dict, List] = field(default=None)
-    split: Optional[Union[str, Split]] = field(default=None)
     cache_dir: Optional[str] = field(default=None)
     ignore_verifications: bool = field(default=None)
     save_infos: bool = field(default=None)
