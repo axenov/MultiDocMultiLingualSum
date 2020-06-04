@@ -1,5 +1,5 @@
 {
-    "output_dir": "models/gpt2-medium-fine-tuned",
+    "output_dir": "models/gpt2-fine-tuned",
     "do_train": true,
     "do_eval": true,
     "evaluate_during_training": true,
@@ -12,7 +12,7 @@
     "learning_rate": 3e-5,
     "num_train_epochs": 8,
   
-    "model_name_or_path": "gpt2-medium",
+    "model_name_or_path": "gpt2",
     "input_max_length": 512,
     "target_max_length": 308,
     "summary_column_name": "clean_summary",

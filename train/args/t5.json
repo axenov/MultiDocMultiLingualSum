@@ -1,5 +1,5 @@
 {
-    "output_dir": "models/t5-large-fine-tuned",
+    "output_dir": "models/t5-base-fine-tuned",
     "do_train": true,
     "do_eval": true,
     "evaluate_during_training": true,
@@ -12,7 +12,7 @@
     "learning_rate": 1e-4,
     "num_train_epochs": 8,
   
-    "model_name_or_path": "t5-large",
+    "model_name_or_path": "t5-base",
     "input_max_length": 512,
     "target_max_length": 256,
     "summary_column_name": "clean_summary",
