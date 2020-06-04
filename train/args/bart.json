@@ -1,0 +1,29 @@
+{
+    "output_dir": "models/bart-large-fine-tuned",
+    "do_train": true,
+    "do_eval": true,
+    "evaluate_during_training": true,
+  
+    "per_gpu_train_batch_size": 4,
+    "per_gpu_eval_batch_size": 4,
+    "gradient_accumulation_steps": 8,
+  
+    "logging_steps": 100,
+    "learning_rate": 3e-5,
+    "num_train_epochs": 8,
+  
+    "model_name_or_path": "bart-large",
+    "input_max_length": 512,
+    "target_max_length": 308,
+    "summary_column_name": "clean_summary",
+    "document_column_name": "clean_document",
+    "wandb_project": "Multi-en-Wiki-News",
+
+  
+    "train_file_path": "valid.pt",
+    "valid_file_path": "train.pt",
+    "max_len": 512,
+    "target_max_len": 308,
+
+    "path": "./en_wiki_multi_news.py"
+  }

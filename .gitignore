@@ -3,6 +3,8 @@ __pycache__/*
 dataset/__pycache__/*
 dataset/wikinews/__pycache__/*
 dataset/sources/__pycache__/*
+*/__pycache__/*
+*/*/__pycache__/*
 
 # csv
 *.csv
@@ -22,3 +24,5 @@ dataset/.en-wiki-multi-news-cache/
 
 extractive/*
 apply_extractive.py
+
+wandb/*
