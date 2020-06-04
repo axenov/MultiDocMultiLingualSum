@@ -45,13 +45,13 @@ class SummarizationTrainer(object):
         torch.save(self.train_dataset, os.path.abspath(train_file_path))
         torch.save(self.valid_dataset, os.path.abspath(valid_file_path))
 
-    def load_and_process_data(self, name, **load_dataset_kwargs):
+    def load_and_process_data(self, **load_dataset_kwargs):
         # load train and validation split of Multi-news
         self.train_dataset = nlp.load_dataset(
-            name, split="train", **load_dataset_kwargs
+            split="train", **load_dataset_kwargs
         )
         self.valid_dataset = nlp.load_dataset(
-            name, split="validation", **load_dataset_kwargs
+            split="validation", **load_dataset_kwargs
         )
 
         # map format_text function to the dataset example wise
