@@ -1,5 +1,5 @@
 {
-    "output_dir": "/content/MultiDocMultiLingualSum /content/drive/My Drive/models/bart-large-fine-tuned",
+    "output_dir": "/content/drive/My Drive/models/bart-large-fine-tuned",
     "do_train": true,
     "do_eval": true,
     "evaluate_during_training": true,
@@ -8,11 +8,11 @@
     "per_gpu_eval_batch_size": 4,
     "gradient_accumulation_steps": 8,
   
-    "logging_steps": 100,
+    "logging_steps": 250,
     "learning_rate": 3e-5,
     "num_train_epochs": 8,
-    "save_steps": 100,
-    "save_total_limit": 5,
+    "save_steps": 250,
+    "save_total_limit": 3,
   
     "model_name_or_path": "bart-large",
     "input_max_length": 512,
