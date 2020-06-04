@@ -5,7 +5,8 @@ import logging
 import os
 import sys
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Union
+from nlp.splits import Split
 import wandb
 
 import numpy as np
@@ -26,14 +27,14 @@ logger = logging.getLogger(__name__)
 class SummarizationTrainer(object):
     def __init__(
         self,
-        max_len,
-        target_max_len,
+        input_max_length,
+        target_max_length,
         summary_column_name,
         document_column_name,
         wandb_project,
     ):
-        self.input_max_length = max_len
-        self.target_max_length = target_max_len
+        self.input_max_length = input_max_length
+        self.target_max_length = target_max_length
 
         self.summary_column_name = summary_column_name
         self.document_column_name = document_column_name
@@ -139,10 +140,10 @@ class SummarizationTrainer(object):
         # Set seed
         set_seed(training_args.seed)
 
-        summarization_trainer = cls(**class_args)
+        summarization_trainer = cls(**dataclasses.asdict(class_args))
 
         logger.info("Load and process dataset")
-        summarization_trainer.load_and_process_data(**dataset_args)
+        summarization_trainer.load_and_process_data(**dataclasses.asdict(dataset_args))
         summarization_trainer.cache_dataset(
             data_args.train_file_path, data_args.valid_file_path
         )
@@ -229,6 +230,15 @@ class ClassArguments:
     Arguments to init the SummarizationTrainer class.
     """
 
+    input_max_length: int = field(metadata={"help": "Max tokens of the input"})
+    target_max_length: int = field(metadata={"help": "Max tokens of the targer"})
+
+    summary_column_name: str = field(metadata={"help": "Name of the summary column"})
+
+    document_column_name: str = field(metadata={"help": "Name of the document column"})
+
+    wandb_project: str = field(metadata={"help": "Name of the wandb project"})
+
     model_name_or_path: str = field(
         metadata={
             "help": "Path to pretrained model or model identifier from huggingface.co/models"
@@ -240,21 +250,12 @@ class ClassArguments:
             "help": "Pretrained tokenizer name or path if not the same as model_name"
         },
     )
-    cache_dir: Optional[str] = field(
+    model_cache_dir: Optional[str] = field(
         default=None,
         metadata={
             "help": "Where do you want to store the pretrained models downloaded from s3"
         },
     )
-
-    max_len: int = field(metadata={"help": "Max tokens of the input"})
-    target_max_len: int = field(metadata={"help": "Max tokens of the targer"})
-
-    summary_column_name: str = field(metadata={"help": "Name of the summary column"})
-
-    document_column_name: str = field(metadata={"help": "Name of the document column"})
-
-    wandb_project: str = field(metadata={"help": "Name of the wandb project"})
 
 
 @dataclass
@@ -294,7 +295,5 @@ class DatasetArguments:
     data_files: Union[Dict, List] = field(default=None)
     split: Optional[Union[str, Split]] = field(default=None)
     cache_dir: Optional[str] = field(default=None)
-    download_config: Optional[DownloadConfig] = field(default=None)
-    download_mode: Optional[GenerateMode] = field(default=None)
     ignore_verifications: bool = field(default=None)
     save_infos: bool = field(default=None)

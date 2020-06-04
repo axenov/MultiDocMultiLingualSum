@@ -1,7 +1,7 @@
-import train.scripts.summarization_trainer as st
+from scripts.t5 import T5SummarizationTrainer
 
 import wandb
 
 wandb.login()
 
-st.SummarizationTrainer.train("train/args/t5_args.json")
+T5SummarizationTrainer.train("train/args/t5_args.json")
