@@ -234,7 +234,6 @@ class ClassArguments:
     target_max_length: int = field(metadata={"help": "Max tokens of the targer"})
 
     summary_column_name: str = field(metadata={"help": "Name of the summary column"})
-
     document_column_name: str = field(metadata={"help": "Name of the document column"})
 
     wandb_project: str = field(metadata={"help": "Name of the wandb project"})
@@ -256,6 +255,8 @@ class ClassArguments:
             "help": "Where do you want to store the pretrained models downloaded from s3"
         },
     )
+
+    title_column_name: Optional[str] = field(default=None, metadata={"help": "Name of the title column"})
 
 
 @dataclass

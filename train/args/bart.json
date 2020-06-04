@@ -1,5 +1,5 @@
 {
-    "output_dir": "models/bart-large-fine-tuned",
+    "output_dir": "/content/MultiDocMultiLingualSum /content/drive/My Drive/models/bart-large-fine-tuned",
     "do_train": true,
     "do_eval": true,
     "evaluate_during_training": true,

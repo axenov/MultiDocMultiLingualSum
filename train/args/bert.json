@@ -1,5 +1,5 @@
 {
-    "output_dir": "models/bert-large-fine-tuned",
+    "output_dir": "/content/MultiDocMultiLingualSum /content/drive/My Drive/models/bert-large-cased-fine-tuned",
     "do_train": true,
     "do_eval": true,
     "evaluate_during_training": true,
@@ -14,7 +14,7 @@
     "save_steps": 100,
     "save_total_limit": 5,
   
-    "model_name_or_path": "bert-large",
+    "model_name_or_path": "bert-large-cased",
     "input_max_length": 512,
     "target_max_length": 308,
     "summary_column_name": "clean_summary",

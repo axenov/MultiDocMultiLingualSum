@@ -14,6 +14,7 @@ class AutoModelSummarizationTrainer(SummarizationTrainer):
         summary_column_name,
         document_column_name,
         wandb_project,
+        **kwargs,
     ):
         super().__init__(
             input_max_length,

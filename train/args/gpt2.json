@@ -1,5 +1,5 @@
 {
-    "output_dir": "models/gpt2-fine-tuned",
+    "output_dir": "/content/MultiDocMultiLingualSum /content/drive/My Drive/models/gpt2-fine-tuned",
     "do_train": true,
     "do_eval": true,
     "evaluate_during_training": true,

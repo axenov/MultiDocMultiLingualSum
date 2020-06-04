@@ -15,6 +15,7 @@ class T5WithTitleSummarizationTrainer(SummarizationTrainer):
         document_column_name,
         title_column_name,
         wandb_project,
+        **kwargs,
     ):
         super().__init__(
             input_max_length,
