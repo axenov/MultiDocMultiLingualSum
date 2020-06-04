@@ -40,9 +40,10 @@ _URL = (
 _TITLE = "title"
 _DOCUMENT = "document"
 _SUMMARY = "summary"
+_CLEAN_DOCUMENT = "clean_document"
+_CLEAN_SUMMARY = "clean_summary"
 
-
-class MultiNews(nlp.GeneratorBasedBuilder):
+class EnWikiMultiNews(nlp.GeneratorBasedBuilder):
     """Multi-News dataset."""
 
     VERSION = nlp.Version("1.0.0")
@@ -55,6 +56,8 @@ class MultiNews(nlp.GeneratorBasedBuilder):
                     _TITLE: nlp.Value("string"),
                     _DOCUMENT: nlp.Value("string"),
                     _SUMMARY: nlp.Value("string"),
+                    _CLEAN_DOCUMENT: nlp.Value("string"),
+                    _CLEAN_SUMMARY: nlp.Value("string"),
                 }
             ),
             # supervised_keys=(_TITLE, _DOCUMENT, _SUMMARY),
@@ -66,8 +69,7 @@ class MultiNews(nlp.GeneratorBasedBuilder):
     def _split_generators(self, dl_manager):
         """Returns SplitGenerators."""
         data_path = dl_manager.download_and_extract(_URL)
-        print(dl_manager)
-        print(data_path)
+        
         return [
             nlp.SplitGenerator(
                 name=nlp.Split.TRAIN,
@@ -92,4 +94,18 @@ class MultiNews(nlp.GeneratorBasedBuilder):
                     _TITLE: elem["title"],
                     _DOCUMENT: elem["sources"],
                     _SUMMARY: elem["summary"],
+                    _CLEAN_DOCUMENT: self.clean_document(elem["sources"]),
+                    _CLEAN_SUMMARY: self.clean_summary(elem["summary"]),
                 }
+
+    def clean_summary(self, summary):
+        summary = summary.replace('\t', ' ')
+        summary = summary.replace('\n', ' ')
+        return summary
+
+    def clean_document(self, document):
+        document = document.replace('|||', ' ')
+        document = document.replace('\n', ' ')
+        return document
+
+        

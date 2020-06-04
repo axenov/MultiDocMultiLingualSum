@@ -14,7 +14,13 @@ parser.add_argument(
     type=str,
     default="dataset/.en-wiki-multi-news-cache",
 )
+parser.add_argument(
+    "--rouge",
+    help="True if compute the ROUGE scores. Take a long time",
+    type=bool,
+    default=False,
+)
 
 args = parser.parse_args()
 
-stats(args.dataset_script_path, args.dataset_cache_path)
+stats(args.dataset_script_path, args.dataset_cache_path, args.rouge)
