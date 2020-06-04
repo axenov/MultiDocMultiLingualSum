@@ -275,10 +275,10 @@ def stats(dataset_script_path, dataset_cache_path):
     # Print ROUGE stats
     print(
         "Rouge-1 R:\t{}\nRouge-2 R:\t{}\nRouge-L R:\t{}\nRouge-Lsum R:\t{}\n".format(
-            rouge_stats['rouge1'].mid.recall,
-            rouge_stats['rouge2'].mid.recall,
-            rouge_stats['rougeL'].mid.recall,
-            rouge_stats['rougeLsum'].mid.recall,
+            rouge_stats["rouge1"].mid.recall,
+            rouge_stats["rouge2"].mid.recall,
+            rouge_stats["rougeL"].mid.recall,
+            rouge_stats["rougeLsum"].mid.recall,
         )
     )
     return None

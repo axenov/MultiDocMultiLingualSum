@@ -43,6 +43,7 @@ _SUMMARY = "summary"
 _CLEAN_DOCUMENT = "clean_document"
 _CLEAN_SUMMARY = "clean_summary"
 
+
 class DeWikiMultiNews(nlp.GeneratorBasedBuilder):
     """Multi-News dataset."""
 
@@ -69,7 +70,7 @@ class DeWikiMultiNews(nlp.GeneratorBasedBuilder):
     def _split_generators(self, dl_manager):
         """Returns SplitGenerators."""
         data_path = dl_manager.download_and_extract(_URL)
-        
+
         return [
             nlp.SplitGenerator(
                 name=nlp.Split.TRAIN,
@@ -99,11 +100,11 @@ class DeWikiMultiNews(nlp.GeneratorBasedBuilder):
                 }
 
     def clean_summary(self, summary):
-        summary = summary.replace('\t', ' ')
-        summary = summary.replace('\n', ' ')
+        summary = summary.replace("\t", " ")
+        summary = summary.replace("\n", " ")
         return summary
 
     def clean_document(self, document):
-        document = document.replace('|||', ' ')
-        document = document.replace('\n', ' ')
+        document = document.replace("|||", " ")
+        document = document.replace("\n", " ")
         return document
