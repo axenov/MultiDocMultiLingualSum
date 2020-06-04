@@ -11,6 +11,8 @@
     "logging_steps": 100,
     "learning_rate": 3e-5,
     "num_train_epochs": 8,
+    "save_steps": 100,
+    "save_total_limit": 5,
   
     "model_name_or_path": "bart-large-cnn",
     "input_max_length": 512,
