@@ -14,7 +14,7 @@
     "save_steps": 250,
     "save_total_limit": 3,
   
-    "model_name_or_path": "bart-large",
+    "model_name_or_path": "facebook/bart-large",
     "input_max_length": 512,
     "target_max_length": 308,
     "summary_column_name": "clean_summary",

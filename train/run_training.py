@@ -7,8 +7,8 @@ import wandb
 
 wandb.login()
 
-T5SummarizationTrainer.train("train/args/t5.json")
-T5WithTitleSummarizationTrainer.train("train/args/t5_with_title.json")
+#T5SummarizationTrainer.train("train/args/t5.json")
+#T5WithTitleSummarizationTrainer.train("train/args/t5_with_title.json")
 BartSummarizationTrainer.train("train/args/bart.json")
 BartSummarizationTrainer.train("train/args/bart_cnn.json")
 AutoModelSummarizationTrainer.train("train/args/bert.json")
