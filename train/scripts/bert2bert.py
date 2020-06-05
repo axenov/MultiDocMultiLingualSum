@@ -1,5 +1,5 @@
 from scripts.summarization_trainer import SummarizationTrainer
-from dataclass_utils import BartDataCollator
+from dataclass_utils import Bert2BertDataCollator
 
 from transformers import EncoderDecoderModel, BertTokenizer
 
