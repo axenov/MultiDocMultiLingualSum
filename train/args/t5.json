@@ -8,9 +8,9 @@
     "per_gpu_eval_batch_size": 4,
     "gradient_accumulation_steps": 8,
   
-    "logging_steps": 50,
+    "logging_steps": 100,
     "learning_rate": 1e-4,
-    "num_train_epochs": 1,
+    "num_train_epochs": 8,
     "save_steps": 250,
     "save_total_limit": 3,
   
