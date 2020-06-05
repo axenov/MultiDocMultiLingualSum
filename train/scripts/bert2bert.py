@@ -5,6 +5,9 @@ from transformers import EncoderDecoderModel, BertTokenizer
 
 
 class Bert2BertSummarizationTrainer(SummarizationTrainer):
+
+    data_collator = Bert2BertDataCollator()
+
     def __init__(
         self,
         model_name_or_path,
@@ -32,4 +35,3 @@ class Bert2BertSummarizationTrainer(SummarizationTrainer):
         )
         self.model = EncoderDecoderModel.from_encoder_decoder_pretrained(model_name_or_path, model_name_or_path, cache_dir=model_cache_dir,
         )
-        self.data_collator = Bert2BertDataCollator()

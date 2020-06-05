@@ -5,6 +5,10 @@ from transformers import T5ForConditionalGeneration, T5Tokenizer
 
 
 class T5WithTitleSummarizationTrainer(SummarizationTrainer):
+
+    data_collator = T5DataCollator()
+
+
     def __init__(
         self,
         model_name_or_path,
@@ -35,7 +39,6 @@ class T5WithTitleSummarizationTrainer(SummarizationTrainer):
         self.model = T5ForConditionalGeneration.from_pretrained(
             model_name_or_path, cache_dir=model_cache_dir,
         )
-        self.data_collator = T5DataCollator()
 
     def format_text(self, example):
         # process the examples in input and target text format and the eos token at the end

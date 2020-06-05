@@ -5,6 +5,9 @@ from transformers import BartForConditionalGeneration, BartTokenizer
 
 
 class BartSummarizationTrainer(SummarizationTrainer):
+
+    data_collator = BartDataCollator()
+
     def __init__(
         self,
         model_name_or_path,
@@ -33,4 +36,3 @@ class BartSummarizationTrainer(SummarizationTrainer):
         self.model = BartForConditionalGeneration.from_pretrained(
             model_name_or_path, cache_dir=model_cache_dir,
         )
-        self.data_collator = BartDataCollator()
