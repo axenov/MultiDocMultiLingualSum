@@ -1,5 +1,5 @@
 {
-    "output_dir": "/content/drive/My Drive/models/gpt2-fine-tuned",
+    "output_dir": "/content/drive/My Drive/models/bert2bert-fine-tuned",
     "do_train": true,
     "do_eval": true,
     "evaluate_during_training": true,
@@ -8,18 +8,19 @@
     "per_gpu_eval_batch_size": 4,
     "gradient_accumulation_steps": 8,
   
-    "logging_steps": 250,
+    "logging_steps": 50,
     "learning_rate": 3e-5,
-    "num_train_epochs": 8,
+    "num_train_epochs": 1,
     "save_steps": 250,
     "save_total_limit": 3,
   
-    "model_name_or_path": "gpt2",
+    "model_name_or_path": "bert-base-cased",
     "input_max_length": 512,
     "target_max_length": 308,
     "summary_column_name": "clean_summary",
     "document_column_name": "clean_document",
     "wandb_project": "Multi-en-Wiki-News",
+    "wandb_run_name": "bert2bert",
 
   
     "train_file_path": "valid.pt",

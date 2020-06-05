@@ -1,4 +1,5 @@
 from scripts.summarization_trainer import SummarizationTrainer
+from dataclass_utils import BartDataCollator
 
 from transformers import BartForConditionalGeneration, BartTokenizer
 
@@ -14,6 +15,7 @@ class BartSummarizationTrainer(SummarizationTrainer):
         summary_column_name,
         document_column_name,
         wandb_project,
+        wandb_run_name,
         **kwargs,
     ):
         super().__init__(
@@ -22,6 +24,7 @@ class BartSummarizationTrainer(SummarizationTrainer):
             summary_column_name,
             document_column_name,
             wandb_project,
+            wandb_run_name,
         )
         self.tokenizer = BartTokenizer.from_pretrained(
             tokenizer_name if tokenizer_name else model_name_or_path,
@@ -30,3 +33,4 @@ class BartSummarizationTrainer(SummarizationTrainer):
         self.model = BartForConditionalGeneration.from_pretrained(
             model_name_or_path, cache_dir=model_cache_dir,
         )
+        self.data_collator = BartDataCollator()

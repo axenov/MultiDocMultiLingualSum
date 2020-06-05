@@ -8,9 +8,9 @@
     "per_gpu_eval_batch_size": 4,
     "gradient_accumulation_steps": 8,
   
-    "logging_steps": 250,
+    "logging_steps": 50,
     "learning_rate": 3e-5,
-    "num_train_epochs": 8,
+    "num_train_epochs": 1,
     "save_steps": 250,
     "save_total_limit": 3,
   
@@ -20,6 +20,7 @@
     "summary_column_name": "clean_summary",
     "document_column_name": "clean_document",
     "wandb_project": "Multi-en-Wiki-News",
+    "wandb_run_name": "bart-cnn",
 
   
     "train_file_path": "valid.pt",

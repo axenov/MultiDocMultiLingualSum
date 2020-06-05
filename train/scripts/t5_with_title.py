@@ -1,4 +1,5 @@
 from scripts.summarization_trainer import SummarizationTrainer
+from dataclass_utils import T5DataCollator
 
 from transformers import T5ForConditionalGeneration, T5Tokenizer
 
@@ -15,6 +16,7 @@ class T5WithTitleSummarizationTrainer(SummarizationTrainer):
         document_column_name,
         title_column_name,
         wandb_project,
+        wandb_run_name,
         **kwargs,
     ):
         super().__init__(
@@ -23,6 +25,7 @@ class T5WithTitleSummarizationTrainer(SummarizationTrainer):
             summary_column_name,
             document_column_name,
             wandb_project,
+            wandb_run_name,
         )
         self.title_column_name = title_column_name
         self.tokenizer = T5Tokenizer.from_pretrained(
@@ -32,6 +35,7 @@ class T5WithTitleSummarizationTrainer(SummarizationTrainer):
         self.model = T5ForConditionalGeneration.from_pretrained(
             model_name_or_path, cache_dir=model_cache_dir,
         )
+        self.data_collator = T5DataCollator()
 
     def format_text(self, example):
         # process the examples in input and target text format and the eos token at the end

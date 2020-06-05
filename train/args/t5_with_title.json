@@ -8,9 +8,9 @@
     "per_gpu_eval_batch_size": 4,
     "gradient_accumulation_steps": 8,
   
-    "logging_steps": 250,
+    "logging_steps": 50,
     "learning_rate": 1e-4,
-    "num_train_epochs": 8,
+    "num_train_epochs": 1,
     "save_steps": 250,
     "save_total_limit": 3,
   
@@ -21,6 +21,7 @@
     "document_column_name": "clean_document",
     "title_column_name": "title",
     "wandb_project": "Multi-en-Wiki-News",
+    "wandb_run_name": "t5-with-title",
 
   
     "train_file_path": "valid.pt",
