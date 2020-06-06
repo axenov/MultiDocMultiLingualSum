@@ -4,8 +4,6 @@ from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Union
 from nlp.splits import Split
 
-from transformers import DataCollator
-
 @dataclass
 class ClassArguments:
     """

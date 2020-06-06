@@ -1,5 +1,6 @@
 from scripts.summarization_trainer import SummarizationTrainer
 
+from transformers import DataCollator
 from transformers import T5ForConditionalGeneration, T5Tokenizer
 
 
