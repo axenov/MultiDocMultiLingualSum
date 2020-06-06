@@ -20,9 +20,9 @@ args = parser.parse_args()
 wandb.login()
 if args.bert2bert:
     Bert2BertSummarizationTrainer.train("train/args/bert2bert.json")
-if args.bart:
-    BartSummarizationTrainer.train("train/args/bart_cnn.json")
 if args.bart_cnn:
+    BartSummarizationTrainer.train("train/args/bart_cnn.json")
+if args.bart:
     BartSummarizationTrainer.train("train/args/bart.json")
 if args.t5:
     T5SummarizationTrainer.train("train/args/t5.json")

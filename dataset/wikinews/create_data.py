@@ -4,26 +4,27 @@ import json
 import os
 from os import listdir
 from os.path import isfile, join
+from pathlib import Path
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
     "--wiki_dump_path",
     help="Path to the dump",
     type=str,
-    default="dataset/wikinews/dumps/dewikinews-latest-pages-meta-current.xml.bz2",
+    default="dataset/wikinews/dumps/frwikinews-latest-pages-meta-current.xml.bz2",
 )
 parser.add_argument("--max_doc_count", help="Number of pages", type=int, default=0)
 parser.add_argument(
     "--index_path",
     help="Path to the index file (url id)",
     type=str,
-    default="dataset/wikinews/index/de.wikinews.index",
+    default="dataset/wikinews/index/fr.wikinews.index",
 )
 parser.add_argument(
     "--json_path",
     help="Path to the json folder",
     type=str,
-    default="dataset/wikinews/json.de/",
+    default="dataset/wikinews/json.fr/",
 )
 
 args = parser.parse_args()
@@ -34,6 +35,7 @@ id = -1
 json_path_template = "{:06d}.json"
 index_template = "{}\t{:06d}\n"
 
+Path(args.json_path).mkdir(parents=False, exist_ok=True)
 new_index = {}
 files = [
     join(args.json_path, f)

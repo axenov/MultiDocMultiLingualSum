@@ -47,12 +47,12 @@ python dataset/wikinews/create_data.py --wiki_dump_path 'dataset/wikinews/dumps/
 
 |        | German | English | French |
 | --- | --- | --- | --- |
-|Pages read | 60427 | 2811419 | xxx |
-|Pages returned | 13454 | 16616 | xxx |
-|Wrong namespace | 46290 | 2769094 | xxx |
-|No sources | 676 | 5742 | xxx |
-|No text | 2 | 36 | xxx |
-|Redirect | 5 | 19931 | xxx |
+|Pages read | 60427 | 2811419 | 74467 |
+|Pages returned | 13454 | 16616 | 15231 |
+|Wrong namespace | 46290 | 2769094 | 50087 |
+|No sources | 676 | 5742 | 6985 |
+|No text | 2 | 36 | 56 |
+|Redirect | 5 | 19931 | 2108 |
 
 ## Index sources
 

@@ -8,33 +8,33 @@ parser.add_argument(
     "--wikinews_json_path",
     help="Path to the wikinews json folder",
     type=str,
-    default="dataset/wikinews/json.de",
+    default="dataset/wikinews/json.fr",
 )
 parser.add_argument(
     "--index_path",
     help="Path to the index file",
     type=str,
-    default="dataset/sources/index/de.sources.index",
+    default="dataset/sources/index/fr.sources.index",
 )
 parser.add_argument(
     "--html_path",
     help="Path to the html folder",
     type=str,
-    default="dataset/sources/html.de",
+    default="dataset/sources/html",
 )
 parser.add_argument(
     "--json_path",
     help="Path to the json folder",
     type=str,
-    default="dataset/sources/json.de",
+    default="dataset/sources/json",
 )
 parser.add_argument(
     "--max_url_count",
     help="Number of sources to index. Set to -1 for all sources",
     type=int,
-    default=1000,
+    default=-1,
 )
-parser.add_argument("--max_workers", help="Number of max_workers", type=int, default=10)
+parser.add_argument("--max_workers", help="Number of max_workers", type=int, default=6)
 parser.add_argument(
     "--restart",
     help="True if you want to restart the indexing",
