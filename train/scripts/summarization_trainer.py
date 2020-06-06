@@ -45,12 +45,8 @@ class SummarizationTrainer(object):
 
     def load_and_process_data(self, **load_dataset_kwargs):
         # load train and validation split of Multi-news
-        self.train_dataset = nlp.load_dataset(
-            split="train", **load_dataset_kwargs
-        )
-        self.valid_dataset = nlp.load_dataset(
-            split="validation", **load_dataset_kwargs
-        )
+        self.train_dataset = nlp.load_dataset(split="train", **load_dataset_kwargs)
+        self.valid_dataset = nlp.load_dataset(split="validation", **load_dataset_kwargs)
 
         # map format_text function to the dataset example wise
         self.train_dataset = self.train_dataset.map(
@@ -193,5 +189,3 @@ class SummarizationTrainer(object):
             results.update(eval_output)
 
         return None
-
-

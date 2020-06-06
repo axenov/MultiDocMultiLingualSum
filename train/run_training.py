@@ -8,11 +8,11 @@ import wandb
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--bert2bert', action='store_true')
-parser.add_argument('--bart', action='store_true')
-parser.add_argument('--bart_cnn', action='store_true')
-parser.add_argument('--t5', action='store_true')
-parser.add_argument('--t5_with_title', action='store_true')
+parser.add_argument("--bert2bert", action="store_true")
+parser.add_argument("--bart", action="store_true")
+parser.add_argument("--bart_cnn", action="store_true")
+parser.add_argument("--t5", action="store_true")
+parser.add_argument("--t5_with_title", action="store_true")
 
 args = parser.parse_args()
 

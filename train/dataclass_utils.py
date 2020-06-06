@@ -4,6 +4,7 @@ from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Union
 from nlp.splits import Split
 
+
 @dataclass
 class ClassArguments:
     """
@@ -37,7 +38,9 @@ class ClassArguments:
         },
     )
 
-    title_column_name: Optional[str] = field(default=None, metadata={"help": "Name of the title column"})
+    title_column_name: Optional[str] = field(
+        default=None, metadata={"help": "Name of the title column"}
+    )
 
 
 @dataclass
