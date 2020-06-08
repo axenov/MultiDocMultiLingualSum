@@ -6,7 +6,9 @@ import pandas as pd
 import numpy as np
 from scipy import stats as scipy_stats
 from sklearn.model_selection import train_test_split
-from nltk.tokenize import word_tokenize
+from nltk.tokenize import word_tokenize, sent_tokenize
+from pathlib import Path
+from string import punctuation
 
 from sources.utils import Library
 
@@ -63,7 +65,6 @@ def get_wikinews(
 def create_dataset(
     recall_threashold,
     hard,
-    language,
     dataset_path,
     wikinews_index_path,
     wikinews_json_path,
@@ -82,6 +83,10 @@ def create_dataset(
     num_sources = []
     dataset = []
 
+    remove_by_num_sources = 0
+    remove_by_rouge_threahold = 0
+    remove_by_clean_conditions = 0
+
     for doc in tqdm(docs, desc="Write dataset"):
         title = doc["title"]
         summary = "\t".join(doc["text"])
@@ -91,13 +96,15 @@ def create_dataset(
             if isinstance(source, dict)
             and "maintext" in source.keys()
             and source["maintext"] != None
-            and source["language"] == language
         ]
-        if doc["score"]["rouge1"].recall < recall_threashold:
-            continue
         if len(sources) == 0:
+            remove_by_num_sources += 1
+            continue
+        if doc["score"]["rouge1"].recall < recall_threashold:
+            remove_by_rouge_threahold += 1 
             continue
         if not is_clean(summary, "|||".join(sources), len(doc["sources"]), hard=hard):
+            remove_by_clean_conditions += 1
             continue
         num_sources.append(len(sources))
         entry = {"title": title, "summary": summary, "sources": "|||".join(sources)}
@@ -116,7 +123,16 @@ def create_dataset(
     write_dataset(dataset_path, "validation", dataset_val)
 
     print(
-        "number of article with:\n - 1 source: {}\n - 2 sources: {}\n - 3 sources: {}\n - 4 sources: {}\n - more sources: {}".format(
+        "Number of articles removed by:\n - no sources: {}\n - rouge score condition: {}\n - cleaning condition: {}".format(
+            remove_by_num_sources,
+            remove_by_rouge_threahold,
+            remove_by_clean_conditions,
+
+        )
+    )
+
+    print(
+        "\n\nnumber of articles with:\n - 1 source: {}\n - 2 sources: {}\n - 3 sources: {}\n - 4 sources: {}\n - more sources: {}".format(
             num_sources.count(1),
             num_sources.count(2),
             num_sources.count(3),
@@ -164,6 +180,7 @@ def is_clean(summary, sources, original_num_sources, hard):
 
 
 def write_dataset(dataset_path, type, dataset):
+    Path(dataset_path).mkdir(parents=True, exist_ok=True)
     with open(f"{dataset_path}/{type}.jsonl", "w") as f:
         for entry in dataset:
             json.dump(entry, f)
@@ -196,42 +213,38 @@ def get_ids(wikinews_index_path, num=-1):
     return choices(ids, k=num)
 
 
-def stats(dataset_script_path, dataset_cache_path):
+def stats(dataset_script_path, dataset_cache_path, do_rouge):
     def words_counter(text):
-        return -1
+        text = text.translate(str.maketrans(punctuation, ' '*len(punctuation)))
+        return len(text.split(' '))
 
     def sentences_counter(text):
-        return -1
+        return len(sent_tokenize(text))
 
     rouge_metric = load_metric("rouge")
+    num_sources = []
+    sum_num_words = []
+    sum_num_sentences = []
+    doc_num_words = []
+    doc_num_sentences = []
 
     def compute_stats(example):
 
         # Rouge score
-        predictions = example["document"]
-        references = example["summary"]
+        predictions = example["clean_document"]
+        references = example["clean_summary"]
         rouge_metric.add(predictions, references)
 
         # Number of sources
-        num_sources = example["document"].count("|||") + 1
+        num_sources.append(example["document"].count("|||") + 1)
 
         # Summary length
-        sum_num_words = words_counter(example["summary"])
-        sum_num_sentences = words_counter(example["summary"])
+        sum_num_words.append(words_counter(example["clean_summary"]))
+        sum_num_sentences.append(sentences_counter(example["clean_summary"]))
 
         # Document length
-        doc_num_words = words_counter(example["document"])
-        doc_num_sentences = words_counter(example["document"])
-
-        example.update(
-            {
-                "num_sources": num_sources,
-                "sum_num_words": sum_num_words,
-                "sum_num_sentences": sum_num_sentences,
-                "doc_num_words": doc_num_words,
-                "doc_num_sentences": doc_num_sentences,
-            }
-        )
+        doc_num_words.append(words_counter(example["clean_document"]))
+        doc_num_sentences.append(sentences_counter(example["clean_document"]))
 
     dataset = load_dataset(
         dataset_script_path, cache_dir=dataset_cache_path, split="train+test+validation"
@@ -239,15 +252,15 @@ def stats(dataset_script_path, dataset_cache_path):
 
     dataset = dataset.map(compute_stats)
 
-    rouge_stats = rouge_metric.compute(
-        rouge_types=["rouge1", "rouge2", "rougeL", "rougeLsum"]
-    )
+    if do_rouge:
+        rouge_stats = rouge_metric.compute(
+            rouge_types=["rouge1", "rouge2", "rougeL", "rougeLsum"]
+        )
 
     # Print number of examples
     print(f"The dataset contains {len(dataset)} examples.")
 
     # Print number of sources stats
-    num_sources = dataset["num_sources"]
     print(
         "number of article with:\n - 1 source: {}\n - 2 sources: {}\n - 3 sources: {}\n - 4 sources: {}\n - more sources: {}".format(
             num_sources.count(1),
@@ -265,20 +278,21 @@ def stats(dataset_script_path, dataset_cache_path):
     # Print length stats
     print(
         "number of words in document:\t{}\nnumber of sentences in document:\t{}\nnumber of words in summary:\t{}\nnumber of sentences in summary:\t{}\n".format(
-            np.mean(dataset["doc_num_words"]),
-            np.mean(dataset["doc_num_sentences"]),
-            np.mean(dataset["sum_num_words"]),
-            np.mean(dataset["sum_num_sentences"]),
+            np.mean(doc_num_words),
+            np.mean(doc_num_sentences),
+            np.mean(sum_num_words),
+            np.mean(sum_num_sentences),
         )
     )
 
     # Print ROUGE stats
-    print(
-        "Rouge-1 R:\t{}\nRouge-2 R:\t{}\nRouge-L R:\t{}\nRouge-Lsum R:\t{}\n".format(
-            rouge_stats["rouge1"].mid.recall,
-            rouge_stats["rouge2"].mid.recall,
-            rouge_stats["rougeL"].mid.recall,
-            rouge_stats["rougeLsum"].mid.recall,
+    if do_rouge:
+        print(
+            "Rouge-1 R:\t{}\nRouge-2 R:\t{}\nRouge-L R:\t{}\nRouge-Lsum R:\t{}\n".format(
+                rouge_stats["rouge1"].mid.recall,
+                rouge_stats["rouge2"].mid.recall,
+                rouge_stats["rougeL"].mid.recall,
+                rouge_stats["rougeLsum"].mid.recall,
+            )
         )
-    )
     return None

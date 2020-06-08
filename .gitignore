@@ -19,6 +19,8 @@ dataset/*.jsonl
 
 
 dataset/.en-wiki-multi-news-cache/
+dataset/.fr-wiki-multi-news-cache/
+dataset/.de-wiki-multi-news-cache/
 
 *.lock
 

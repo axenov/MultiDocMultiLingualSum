@@ -14,7 +14,7 @@
 # limitations under the License.
 
 # Lint as: python3
-"""De Wiki Multi News dataset."""
+"""Fr Wiki Multi News dataset."""
 
 from __future__ import absolute_import, division, print_function
 
@@ -30,11 +30,11 @@ DFKI
 """
 
 _DESCRIPTION = """
-German Wikinews dataset
+French Wikinews dataset
 """
 
 _URL = (
-    "https://drive.google.com/uc?export=download&id=1DGnbUY9zwiThTdgUvVTSAvSVHoloCgun"
+    "https://drive.google.com/uc?export=download&id=1n_JFVzQuCi9srpukYyQojWjyb06d-eFF"
 )
 
 _TITLE = "title"
@@ -44,7 +44,7 @@ _CLEAN_DOCUMENT = "clean_document"
 _CLEAN_SUMMARY = "clean_summary"
 
 
-class DeWikiMultiNews(nlp.GeneratorBasedBuilder):
+class FrWikiMultiNews(nlp.GeneratorBasedBuilder):
     """Multi-News dataset."""
 
     VERSION = nlp.Version("1.0.0")

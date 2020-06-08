@@ -44,7 +44,7 @@ def get_pages_from_wiki_dump(wiki_dump_path, max_doc_count=0):
 
     sources_translations = ["quellen", "sources", "quelle", "source"]
 
-    category_pattern = re.compile("\[\[(Category|Kategorie):(.*?)\]\]")
+    category_pattern = re.compile("\[\[(Category|Kategorie|Catégorie):(.*?)\]\]")
     footnote_pattern = re.compile(r"==(.+?)==(.+?)\n *\n", flags=re.DOTALL)
     url_pattern = re.compile(r"https?://[^\s|\]]+")
     blank_pattern = re.compile(r"^\s*$")
