@@ -8,6 +8,9 @@ import wandb
 import argparse
 
 parser = argparse.ArgumentParser()
+parser.add_argument("--en", action="store_true")
+parser.add_argument("--fr", action="store_true")
+parser.add_argument("--de", action="store_true")
 parser.add_argument("--bert2bert", action="store_true")
 parser.add_argument("--bart", action="store_true")
 parser.add_argument("--bart_cnn", action="store_true")
@@ -16,15 +19,22 @@ parser.add_argument("--t5_with_title", action="store_true")
 
 args = parser.parse_args()
 
+lang = None
+if args.en:
+    lang = 'en'
+elif args.fr:
+    lang = 'fr'
+elif args.de:
+    lang = 'de'
 
 wandb.login()
 if args.bert2bert:
-    Bert2BertSummarizationTrainer.train("train/args/bert2bert.json")
+    Bert2BertSummarizationTrainer.train(f"train/args/{lang}_bert2bert.json")
 if args.bart_cnn:
-    BartSummarizationTrainer.train("train/args/bart_cnn.json")
+    BartSummarizationTrainer.train(f"train/args/{lang}_bart_cnn.json")
 if args.bart:
-    BartSummarizationTrainer.train("train/args/bart.json")
+    BartSummarizationTrainer.train(f"train/args/{lang}_bart.json")
 if args.t5:
-    T5SummarizationTrainer.train("train/args/t5.json")
+    T5SummarizationTrainer.train(f"train/args/{lang}_t5.json")
 if args.t5_with_title:
-    T5WithTitleSummarizationTrainer.train("train/args/t5_with_title.json")
+    T5WithTitleSummarizationTrainer.train(f"train/args/{lang}_t5_with_title.json")
