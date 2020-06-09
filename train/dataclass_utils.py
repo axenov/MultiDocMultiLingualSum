@@ -41,6 +41,12 @@ class ClassArguments:
     title_column_name: Optional[str] = field(
         default=None, metadata={"help": "Name of the title column"}
     )
+    summarize_prefix: Optional[str] = field(
+        default=None, metadata={"help": "Prefix for T5"}
+    )
+    title_prefix: Optional[str] = field(
+        default=None, metadata={"help": "Title prefix for T5"}
+    )
 
 
 @dataclass
