@@ -16,7 +16,7 @@
   
     "model_name_or_path": "bert-base-cased",
     "input_max_length": 512,
-    "target_max_length": 308,
+    "target_max_length": 198,
     "summary_column_name": "clean_summary",
     "document_column_name": "clean_document",
     "wandb_project": "Multi-fr-Wiki-News",
@@ -26,7 +26,7 @@
     "train_file_path": "valid.pt",
     "valid_file_path": "train.pt",
     "max_len": 512,
-    "target_max_len": 308,
+    "target_max_len": 198,
 
     "path": "./fr_wiki_multi_news.py"
   }

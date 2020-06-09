@@ -47,6 +47,7 @@ class T5SummarizationTrainer(SummarizationTrainer):
         target_max_length,
         summary_column_name,
         document_column_name,
+        summarize_prefix,
         wandb_project,
         wandb_run_name,
         **kwargs,
@@ -66,11 +67,12 @@ class T5SummarizationTrainer(SummarizationTrainer):
         self.model = T5ForConditionalGeneration.from_pretrained(
             model_name_or_path, cache_dir=model_cache_dir,
         )
+        self.summarize_prefix = summarize_prefix
 
     def format_text(self, example):
         # process the examples in input and target text format and the eos token at the end
         example["input_text"] = (
-            "summarize: %s </s>" % example[self.document_column_name]
+            "%s: %s </s>" % (self.summarize_prefix, example[self.document_column_name])
         )
         example["target_text"] = "%s </s>" % example[self.summary_column_name]
         return example

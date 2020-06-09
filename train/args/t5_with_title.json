@@ -16,10 +16,12 @@
   
     "model_name_or_path": "t5-base",
     "input_max_length": 512,
-    "target_max_length": 308,
+    "target_max_length": 198,
     "summary_column_name": "clean_summary",
     "document_column_name": "clean_document",
     "title_column_name": "title",
+    "summarize_prefix": "résume",
+    "title_prefix": "titre",
     "wandb_project": "Multi-fr-Wiki-News",
     "wandb_run_name": "t5-with-title",
 
@@ -27,7 +29,7 @@
     "train_file_path": "valid.pt",
     "valid_file_path": "train.pt",
     "max_len": 512,
-    "target_max_len": 308,
+    "target_max_len": 198,
 
     "path": "./fr_wiki_multi_news.py"
   }

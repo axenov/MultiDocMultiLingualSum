@@ -48,6 +48,8 @@ class T5WithTitleSummarizationTrainer(SummarizationTrainer):
         summary_column_name,
         document_column_name,
         title_column_name,
+        summarize_prefix,
+        title_prefix,
         wandb_project,
         wandb_run_name,
         **kwargs,
@@ -68,11 +70,15 @@ class T5WithTitleSummarizationTrainer(SummarizationTrainer):
         self.model = T5ForConditionalGeneration.from_pretrained(
             model_name_or_path, cache_dir=model_cache_dir,
         )
+        self.summarize_prefix = summarize_prefix,
+        self.title_prefix = title_prefix,
 
     def format_text(self, example):
         # process the examples in input and target text format and the eos token at the end
-        example["input_text"] = "title: %s  summarize: %s </s>" % (
+        example["input_text"] = "%s: %s  %s: %s </s>" % (
+            self.title_prefix,
             example[self.title_column_name],
+            self.summarize_prefix,
             example[self.document_column_name],
         )
         example["target_text"] = "%s </s>" % example[self.summary_column_name]
