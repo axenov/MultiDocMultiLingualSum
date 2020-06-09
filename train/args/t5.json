@@ -1,5 +1,5 @@
 {
-    "output_dir": "/content/drive/My Drive/models/t5-base-fine-tuned",
+    "output_dir": "/content/drive/My Drive/fr-models/t5-base-fine-tuned",
     "do_train": true,
     "do_eval": true,
     "evaluate_during_training": true,
@@ -19,7 +19,7 @@
     "target_max_length": 308,
     "summary_column_name": "clean_summary",
     "document_column_name": "clean_document",
-    "wandb_project": "Multi-en-Wiki-News",
+    "wandb_project": "Multi-fr-Wiki-News",
     "wandb_run_name": "t5",
 
   
@@ -28,5 +28,5 @@
     "max_len": 512,
     "target_max_len": 308,
 
-    "path": "./en_wiki_multi_news.py"
+    "path": "./fr_wiki_multi_news.py"
   }

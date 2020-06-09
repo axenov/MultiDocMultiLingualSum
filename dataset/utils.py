@@ -231,9 +231,9 @@ def stats(dataset_script_path, dataset_cache_path, do_rouge):
     def compute_stats(example):
 
         # Rouge score
-        predictions = example["clean_document"]
-        references = example["clean_summary"]
-        rouge_metric.add(predictions, references)
+        prediction = example["clean_document"]
+        reference = example["clean_summary"]
+        rouge_metric.add(prediction, reference)
 
         # Number of sources
         num_sources.append(example["document"].count("|||") + 1)
@@ -254,7 +254,7 @@ def stats(dataset_script_path, dataset_cache_path, do_rouge):
 
     if do_rouge:
         rouge_stats = rouge_metric.compute(
-            rouge_types=["rouge1", "rouge2", "rougeL", "rougeLsum"]
+            rouge_types=["rouge1", "rouge2", "rougeL"]
         )
 
     # Print number of examples
@@ -288,11 +288,10 @@ def stats(dataset_script_path, dataset_cache_path, do_rouge):
     # Print ROUGE stats
     if do_rouge:
         print(
-            "Rouge-1 R:\t{}\nRouge-2 R:\t{}\nRouge-L R:\t{}\nRouge-Lsum R:\t{}\n".format(
+            "Rouge-1 R:\t{}\nRouge-2 R:\t{}\nRouge-L R:\t{}\n".format(
                 rouge_stats["rouge1"].mid.recall,
                 rouge_stats["rouge2"].mid.recall,
                 rouge_stats["rougeL"].mid.recall,
-                rouge_stats["rougeLsum"].mid.recall,
             )
         )
     return None
