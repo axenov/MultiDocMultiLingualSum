@@ -22,13 +22,13 @@ args = parser.parse_args()
 
 lang = None
 if args.en:
-    lang = 'en'
+    lang = "en"
 elif args.fr:
-    lang = 'fr'
+    lang = "fr"
 elif args.de:
-    lang = 'de'
+    lang = "de"
 elif args.combine:
-    lang = 'combine'
+    lang = "combine"
 
 wandb.login()
 if args.bert2bert:
