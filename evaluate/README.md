@@ -141,7 +141,7 @@ See ``args/`` to see more examples.
 
 ### Extractives methods
 
-Run ``python run_baseline --run_args_file "args/run_args_extractives.jon"``
+Run ``python evaluate/run_baseline.py --run_args_file "evaluate/args/run_args_en_extractives.json"``
 
 |     | rouge1 P |  rouge1 R | rouge1 F | rouge2 P |  rouge2 R | rouge2 F | rougeL P |  rougeL R | rougeL F |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -154,7 +154,7 @@ Run ``python run_baseline --run_args_file "args/run_args_extractives.jon"``
 
 ### Abstractives methods combined with Lead
 
-Run ``python run_baseline --run_args_file "args/run_args_abstractives_with_lead.jon"``
+Run ``python evaluate/run_baseline.py --run_args_file "evaluate/args/run_args_en_abstractives_with_lead.json"``
 
 |     | rouge1 P |  rouge1 R | rouge1 F | rouge2 P |  rouge2 R | rouge2 F | rougeL P |  rougeL R | rougeL F |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -162,3 +162,33 @@ Run ``python run_baseline --run_args_file "args/run_args_abstractives_with_lead.
 | Lead + Bart-cnn | 46.48% | 46.19% | 43.92% | 18.54% | 18.05% | 17.35% | 24.48% | 24.47% | 23.16% |
 | Lead + T5 | 48.01% | 40.61% | 41.60% | 18.96% | 15.75% | 16.30% | 26.14% | 22.20% | 22.63% |
 | Lead + T5 with title | 47.90% | 40.09% | 41.30% | 18.65% | 15.18% | 15.86% | 25.80% | 21.69% | 22.27% |
+
+## Results for ``de-wiki-multi-news``
+
+### Extractives methods
+
+Run ``python evaluate/run_baseline.py --run_args_file "evaluate/args/run_args_de_extractives.json"``
+
+|     | rouge1 P |  rouge1 R | rouge1 F | rouge2 P |  rouge2 R | rouge2 F | rougeL P |  rougeL R | rougeL F |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Random | 32.89% | 35.59% | 31.52% | 8.38% | 9.29% | 8.11% | 13.87% | 15.28% | 13.35% |
+| Lead | 36.08% | 38.67% | 34.45% | 10.71% | 11.82% | 10.38% | 16.67% | 18.59% | 16.17% |
+| LexRank | 30.46% | 43.29% | 33.53% | 9.22% | 13.53% | 10.30% | 13.25% | 19.75% | 14.85% |
+| TextRank | 31.30% | 40.23% | 32.52% | 8.93% | 11.81% | 9.42% | 13.63% | 18.10% | 14.33% |
+| TF-IDF | 33.13% | 40.35% | 33.77% | 9.75% | 12.29% | 10.05% | 14.58% | 18.57% | 15.12% |
+| Rouge Oracle | 44.57% | 46.50% | 41.78% | 20.88% | 20.57% | 19.04% | 19.02% | 20.48% | 18.08% |
+
+## Results for ``fr-wiki-multi-news``
+
+### Extractives methods
+
+Run ``python evaluate/run_baseline.py --run_args_file "evaluate/args/run_args_fr_extractives.json"``
+
+|     | rouge1 P |  rouge1 R | rouge1 F | rouge2 P |  rouge2 R | rouge2 F | rougeL P |  rougeL R | rougeL F |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Random | 26.49% | 41.97% | 28.60% | 8.73% | 14.60% | 9.62% | 13.06% | 22.54% | 14.50% |
+| Lead | 27.40% | 46.05% | 30.59% | 10.42% | 18.61% | 11.90% | 14.52% | 26.89% | 16.82% |
+| LexRank | 23.11% | 49.16% | 28.70% | 8.93% | 19.39% | 11.22% | 11.66% | 27.28% | 14.94% |
+| TextRank | 23.36% | 48.41% | 28.70% | 8.70% | 18.73% | 10.85% | 11.77% | 26.57% | 14.86% |
+| TF-IDF | 26.03% | 48.39% | 30.22% | 9.65% | 19.21% | 11.52% | 13.26% | 27.29% | 15.99% |
+| Rouge Oracle | 25.75% | 56.34% | 31.69% | 12.42% | 26.55% | 15.06% | 12.31% | 30.16% | 15.71% |

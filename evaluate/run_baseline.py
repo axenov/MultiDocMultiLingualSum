@@ -33,7 +33,10 @@ for baseline in args.baselines:
 # Save results
 Path(args.run.hypotheses_folder).mkdir(parents=True, exist_ok=True)
 utils.write_references(
-    dataset, args.run.hypotheses_folder, args.dataset.summary_colunm_name
+    dataset, args.run.hypotheses_folder, args.dataset.summary_colunm_name,
+)
+utils.write_documents(
+    dataset, args.run.hypotheses_folder, args.dataset.document_column_name,
 )
 utils.write_hypotheses(dataset, args.run.hypotheses_folder)
 if args.run.csv_file != None:

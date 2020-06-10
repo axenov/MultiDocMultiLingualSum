@@ -9,17 +9,17 @@
     ],
 
     "dataset": {
-        "name": "en_wiki_multi_news.py",
+        "name": "de_wiki_multi_news.py",
         "split": "test",
-        "cache_dir": "dataset/.en-wiki-multi-news-cache",
+        "cache_dir": "dataset/.de-wiki-multi-news-cache",
         "document_column_name": "clean_document",
         "summary_colunm_name": "clean_summary"
     },
 
     "run": {
-        "hypotheses_folder": "results/hypotheses/",
-        "csv_file": "results/results.csv",
-        "md_file": "results/results.md",
+        "hypotheses_folder": "evaluate/results/de_extractives_hypotheses/",
+        "csv_file": "evaluate/results/de_extractives_results.csv",
+        "md_file": "evaluate/results/de_extractives_results.md",
         "rouge_types": {
             "rouge1": ["mid.precision", "mid.recall", "mid.fmeasure"],
             "rouge2": ["mid.precision", "mid.recall", "mid.fmeasure"],
