@@ -11,6 +11,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--en", action="store_true")
 parser.add_argument("--fr", action="store_true")
 parser.add_argument("--de", action="store_true")
+parser.add_argument("--combine", action="store_true")
 parser.add_argument("--bert2bert", action="store_true")
 parser.add_argument("--bart", action="store_true")
 parser.add_argument("--bart_cnn", action="store_true")
@@ -26,6 +27,8 @@ elif args.fr:
     lang = 'fr'
 elif args.de:
     lang = 'de'
+elif args.combine:
+    lang = 'combine'
 
 wandb.login()
 if args.bert2bert:

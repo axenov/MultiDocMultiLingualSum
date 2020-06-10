@@ -1,5 +1,5 @@
 {
-    "output_dir": "train/en-models/t5-base-fine-tuned",
+    "output_dir": "train/combine-models/t5-base-fine-tuned",
     "do_train": true,
     "do_eval": true,
     "evaluate_during_training": true,
@@ -14,13 +14,17 @@
     "save_steps": 250,
     "save_total_limit": 3,
   
-    "model_name_or_path": "t5-base",
+    "moenl_name_or_path": "t5-base",
     "input_max_length": 512,
     "target_max_length": 307,
     "summary_column_name": "clean_summary",
     "document_column_name": "clean_document",
-    "summarize_prefix": "summarize",
-    "wandb_project": "Multi-en-Wiki-News",
+    "summarize_prefix": {
+      "en": "summarize",
+      "de": "zusammenfassen",
+      "fr": "résume"
+    },
+    "wandb_project": "Multi-combine-Wiki-News",
     "wandb_run_name": "t5",
 
   
@@ -29,5 +33,5 @@
     "max_len": 512,
     "target_max_len": 307,
 
-    "path": "./en_wiki_multi_news.py"
+    "path": "./combine_wiki_multi_news.py"
   }
