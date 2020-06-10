@@ -1,6 +1,12 @@
 # Summarization Baselines
 
+Implementation a varius summarization baselines including. This repository can be used to compare ROUGE results of summarization method (extractive or abstractive). 
 
+This repository is based on [``nlp`` library](https://github.com/huggingface/nlp) for load data and to compute ROUGE metric.
+
+The idea is that you have a summarization dataset (``nlp.Dataset`` class) with at least a column with texts to summarize (``document_column_name``) and one column with reference summaries (``summary_colunm_name``). Then you want to run multiple baselines on it and compare ROUGE results of these differents methods of summarization. 
+
+See available baseline [here](#available-baselines). You can add your summarization model (extractive or abstractive) as a new baseline to compare its performance with other baselines. Go [here](#add-baseline) for more details to add a baseline.
 
 ## Available baselines
 
@@ -18,12 +24,6 @@
 ## Usage
 
 To run baseline you first have to configure a args ``.json`` file with your parameters. See [here](#args-file) to see how the ``.json`` file is built.
-
-This repository is based on [``nlp`` library](https://github.com/huggingface/nlp) for load data and to compute ROUGE metric.
-
-The idea is that you have a summarization dataset (``nlp.Dataset`` class) with at least a column with texts to summarize (``document_column_name``) and one column with reference summaries (``summary_colunm_name``). Then you want to run multiple baselines on it and compare ROUGE results of these differents methods of summarization.
-
-You can add your summarization model (extractive or abstractive) as a new baseline to compare its performance with other baselines. Go [here](#add-baseline) for more details to add a baseline.
 
 Once you have all baselines you need, your dataset and your configured ``run_args.json`` file, you can run the computation by running:
 
@@ -139,7 +139,9 @@ See ``args/`` to see more examples.
 
 ## Results for ``en-wiki-multi-news``
 
-### Run ``python run_baseline --run_args_file "args/run_args_extractives.jon"``
+### Extractives methods
+
+Run ``python run_baseline --run_args_file "args/run_args_extractives.jon"``
 
 |     | rouge1 P |  rouge1 R | rouge1 F | rouge2 P |  rouge2 R | rouge2 F | rougeL P |  rougeL R | rougeL F |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -150,7 +152,9 @@ See ``args/`` to see more examples.
 | TF-IDF | 36.72% | 50.81% | 40.28% | 12.75% | 18.06% | 14.09% | 17.01% | 24.46% | 18.91% |
 | Rouge Oracle | 50.48% | 56.48% | 49.54% | 28.52% | 29.93% | 27.07% | 22.68% | 25.83% | 22.29% |
 
-### Run ``python run_baseline --run_args_file "args/run_args_abstractives_with_lead.jon"``
+### Abstractives methods combined with Lead
+
+Run ``python run_baseline --run_args_file "args/run_args_abstractives_with_lead.jon"``
 
 |     | rouge1 P |  rouge1 R | rouge1 F | rouge2 P |  rouge2 R | rouge2 F | rougeL P |  rougeL R | rougeL F |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
