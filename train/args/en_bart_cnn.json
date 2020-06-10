@@ -1,5 +1,5 @@
 {
-    "output_dir": "/content/drive/My Drive/fr-models/bart-large-cnn-fine-tuned",
+    "output_dir": "train/en-models/bart-large-cnn-fine-tuned",
     "do_train": true,
     "do_eval": true,
     "evaluate_during_training": true,
@@ -14,19 +14,19 @@
     "save_steps": 250,
     "save_total_limit": 3,
   
-    "model_name_or_path": "facebook/bart-large-cnn",
+    "moenl_name_or_path": "facebook/bart-large-cnn",
     "input_max_length": 1024,
-    "target_max_length": 198,
+    "target_max_length": 307,
     "summary_column_name": "clean_summary",
     "document_column_name": "clean_document",
-    "wandb_project": "Multi-fr-Wiki-News",
+    "wandb_project": "Multi-en-Wiki-News",
     "wandb_run_name": "bart-cnn",
 
   
     "train_file_path": "valid.pt",
     "valid_file_path": "train.pt",
     "max_len": 1024,
-    "target_max_len": 198,
+    "target_max_len": 307,
 
-    "path": "./fr_wiki_multi_news.py"
+    "path": "./en_wiki_multi_news.py"
   }

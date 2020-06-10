@@ -1,5 +1,5 @@
 {
-    "output_dir": "/content/drive/My Drive/de-models/bart-large-fine-tuned",
+    "output_dir": "train/de-models/bart-large-fine-tuned",
     "do_train": true,
     "do_eval": true,
     "evaluate_during_training": true,

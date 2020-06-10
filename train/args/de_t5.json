@@ -1,5 +1,5 @@
 {
-    "output_dir": "/content/drive/My Drive/de-models/t5-base-fine-tuned",
+    "output_dir": "train/de-models/t5-base-fine-tuned",
     "do_train": true,
     "do_eval": true,
     "evaluate_during_training": true,

@@ -1,5 +1,5 @@
 {
-    "output_dir": "/content/drive/My Drive/fr-models/t5-base-with-title-fine-tuned",
+    "output_dir": "train/fr-models/t5-base-with-title-fine-tuned",
     "do_train": true,
     "do_eval": true,
     "evaluate_during_training": true,

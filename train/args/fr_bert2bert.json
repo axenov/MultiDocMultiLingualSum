@@ -1,5 +1,5 @@
 {
-    "output_dir": "/content/drive/My Drive/fr-models/bert2bert-fine-tuned-lr-1e-4",
+    "output_dir": "train/fr-models/bert2bert-fine-tuned",
     "do_train": true,
     "do_eval": true,
     "evaluate_during_training": true,
