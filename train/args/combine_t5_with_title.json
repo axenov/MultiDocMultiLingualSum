@@ -20,16 +20,8 @@
     "summary_column_name": "clean_summary",
     "document_column_name": "clean_document",
     "title_column_name": "title",
-    "summarize_prefix": {
-      "en": "summarize",
-      "de": "zusammenfassen",
-      "fr": "résume"
-    },
-    "title_prefix": {
-      "en": "title",
-      "de": "titel",
-      "fr": "titre"
-    },
+    "summarize_prefix": null,
+    "title_prefix": null,
     "wandb_project": "Multi-combine-Wiki-News",
     "wandb_run_name": "t5-with-title",
 

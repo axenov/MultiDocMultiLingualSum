@@ -161,15 +161,15 @@
     "dataset": {
         "name": "en_wiki_multi_news.py",
         "split": "test",
-        "cache_dir": ".en-wiki-multi-news-cache",
+        "cache_dir": "dataset/.en-wiki-multi-news-cache",
         "document_column_name": "clean_document",
         "summary_colunm_name": "clean_summary"
     },
 
     "run": {
-        "hypotheses_folder": "hypotheses_abstractives_with_lead/",
-        "csv_file": null,
-        "md_file": "results_abstractives_with_lead.md",
+        "hypotheses_folder": "results/hypotheses/",
+        "csv_file": "results/results.csv",
+        "md_file": "results/results.md",
         "rouge_types": {
             "rouge1": ["mid.precision", "mid.recall", "mid.fmeasure"],
             "rouge2": ["mid.precision", "mid.recall", "mid.fmeasure"],

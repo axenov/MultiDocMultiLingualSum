@@ -74,6 +74,16 @@ class T5WithTitleSummarizationTrainer(SummarizationTrainer):
         self.summarize_prefix = summarize_prefix
         self.title_prefix = title_prefix
         self.version_column = version_column
+        self.summarize_prefixes = {
+            "en": "summarize",
+            "de": "zusammenfassen",
+            "fr": "résume"
+        }
+        self.title_prefixes = {
+            "en": "title",
+            "de": "titel",
+            "fr": "titre"
+        }
 
     def format_text(self, example):
         # process the examples in input and target text format and the eos token at the end
@@ -86,9 +96,9 @@ class T5WithTitleSummarizationTrainer(SummarizationTrainer):
             )
         else:
             example["input_text"] = "%s: %s  %s: %s </s>" % (
-                self.title_prefix[example[self.version_column]],
+                self.title_prefixes[example[self.version_column]],
                 example[self.title_column_name],
-                self.summarize_prefix[example[self.version_column]],
+                self.summarize_prefixes[example[self.version_column]],
                 example[self.document_column_name],
             )
         example["target_text"] = "%s </s>" % example[self.summary_column_name]

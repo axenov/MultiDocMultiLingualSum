@@ -19,11 +19,7 @@
     "target_max_length": 307,
     "summary_column_name": "clean_summary",
     "document_column_name": "clean_document",
-    "summarize_prefix": {
-      "en": "summarize",
-      "de": "zusammenfassen",
-      "fr": "résume"
-    },
+    "summarize_prefix": null,
     "wandb_project": "Multi-combine-Wiki-News",
     "wandb_run_name": "t5",
 
