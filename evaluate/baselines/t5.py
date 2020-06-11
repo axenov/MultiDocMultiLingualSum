@@ -12,7 +12,7 @@ class T5(Baseline):
     T5 model from HuggingFace
     """
 
-    def __init__(self, name, model_name, input_max_length, device, batch_size):
+    def __init__(self, name, model_name, input_max_length, device, batch_size, summarize_prefix):
         super().__init__(name)
         if isinstance(model_name, str):
             model_name = [model_name, model_name]
@@ -21,6 +21,7 @@ class T5(Baseline):
         self.input_max_length = input_max_length
         self.device = device
         self.batch_size = batch_size
+        self.summarize_prefix = summarize_prefix
 
     def get_summaries(
         self, dataset, document_column_name, **kwargs,
@@ -48,7 +49,7 @@ class T5(Baseline):
 
     def prepare_dataset(self, dataset, document_column_name):
         def add_eos_to_examples(example, document_column_name=document_column_name):
-            example["input_text"] = "summarize: %s </s>" % example[document_column_name]
+            example["input_text"] = "%s: %s </s>" % (self.summarize_prefix, example[document_column_name])
             return example
 
         def convert_to_features(

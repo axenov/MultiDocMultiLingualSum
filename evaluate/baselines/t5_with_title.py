@@ -12,7 +12,7 @@ class T5WithTitle(Baseline):
     T5 model from HuggingFace with title in the input
     """
 
-    def __init__(self, name, model_name, input_max_length, device, batch_size):
+    def __init__(self, name, model_name, input_max_length, device, batch_size, summarize_prefix, title_prefix):
         super().__init__(name)
         if isinstance(model_name, str):
             model_name = [model_name, model_name]
@@ -21,6 +21,8 @@ class T5WithTitle(Baseline):
         self.input_max_length = input_max_length
         self.device = device
         self.batch_size = batch_size
+        self.summarize_prefix = summarize_prefix
+        self.title_prefix = title_prefix
 
     def get_summaries(
         self, dataset, document_column_name, title_column_name, **kwargs,
@@ -50,8 +52,10 @@ class T5WithTitle(Baseline):
 
     def prepare_dataset(self, dataset, document_column_name, title_column_name):
         def add_eos_to_examples(example, document_column_name=document_column_name):
-            example["input_text"] = "title: %s  summarize: %s </s>" % (
+            example["input_text"] = "%s: %s  %s: %s </s>" % (
+                self.title_prefix,
                 example[title_column_name],
+                self.summarize_prefix,
                 example[document_column_name],
             )
             return example
