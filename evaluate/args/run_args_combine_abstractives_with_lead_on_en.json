@@ -1,0 +1,87 @@
+{
+    "baselines": [
+        {
+            "baseline_class": "Combine", 
+            "init_kwargs": {
+                "name": "Lead + Bart",
+                "extractive_class": "Lead",
+                "abstractive_class": "Bart",
+                "extractive_args": {
+                    "name": "Lead"
+                },
+                "abstractive_args": {
+                    "name": "Bart",
+                    "model_name": "airKlizz/bart-large-multi-combine-wiki-news",
+                    "input_max_length": 1024,
+                    "device": "cuda",
+                    "batch_size": 8
+                }
+            }, 
+            "run_kwargs": {
+                "extractive_args": {
+                    "num_sentences": null
+                },
+                "abstractive_args": {
+                    "num_beams": 4,
+                    "length_penalty": 2.0,
+                    "max_length": 400,
+                    "min_length": 200,
+                    "no_repeat_ngram_size": 3,
+                    "early_stopping": true
+                }
+            }
+        },
+        {
+            "baseline_class": "Combine", 
+            "init_kwargs": {
+                "name": "Lead + T5",
+                "extractive_class": "Lead",
+                "abstractive_class": "T5",
+                "extractive_args": {
+                    "name": "Lead"
+                },
+                "abstractive_args": {
+                    "name": "T5",
+                    "model_name": "airKlizz/t5-base-multi-combine-wiki-news",
+                    "input_max_length": 512,
+                    "device": "cuda",
+                    "batch_size": 8,
+                    "summarize_prefix": "summarize"
+                }
+            }, 
+            "run_kwargs": {
+                "extractive_args": {
+                    "num_sentences": null
+                },
+                "abstractive_args": {
+                    "num_beams": 4,
+                    "length_penalty": 2.0,
+                    "max_length": 400,
+                    "min_length": 200,
+                    "no_repeat_ngram_size": 3,
+                    "early_stopping": true
+                }
+            }
+        }
+    ],
+
+    "dataset": {
+        "name": "fr_wiki_multi_news.py",
+        "split": "test",
+        "cache_dir": "dataset/.fr-wiki-multi-news-cache",
+        "document_column_name": "clean_document",
+        "summary_colunm_name": "clean_summary"
+    },
+
+    "run": {
+        "hypotheses_folder": "evaluate/results/combine_abstractives_with_lead_hypotheses_on_en/",
+        "csv_file": "evaluate/results/combine_abstractives_with_lead_results_on_en.csv",
+        "md_file": "evaluate/results/combine_abstractives_with_lead_results_on_en.md",
+        "rouge_types": {
+            "rouge1": ["mid.precision", "mid.recall", "mid.fmeasure"],
+            "rouge2": ["mid.precision", "mid.recall", "mid.fmeasure"],
+            "rougeL": ["mid.precision", "mid.recall", "mid.fmeasure"]
+        }
+    }
+        
+}
