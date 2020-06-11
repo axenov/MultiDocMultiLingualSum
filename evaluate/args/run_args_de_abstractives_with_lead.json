@@ -99,7 +99,7 @@
             "init_kwargs": {
                 "name": "Lead + T5 with title",
                 "extractive_class": "Lead",
-                "abstractive_class": "T5",
+                "abstractive_class": "T5 with title",
                 "extractive_args": {
                     "name": "Lead"
                 },

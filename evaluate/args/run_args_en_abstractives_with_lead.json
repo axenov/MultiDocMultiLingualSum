@@ -107,7 +107,8 @@
                     "model_name": "airKlizz/t5-base-multi-en-wiki-news",
                     "input_max_length": 512,
                     "device": "cuda",
-                    "batch_size": 8
+                    "batch_size": 8,
+                    "summarize_prefix": "summarize"
                 }
             }, 
             "run_kwargs": {
@@ -129,7 +130,7 @@
             "init_kwargs": {
                 "name": "Lead + T5 with title",
                 "extractive_class": "Lead",
-                "abstractive_class": "T5",
+                "abstractive_class": "T5 with title",
                 "extractive_args": {
                     "name": "Lead"
                 },
@@ -138,7 +139,9 @@
                     "model_name": "airKlizz/t5-base-with-title-multi-en-wiki-news",
                     "input_max_length": 512,
                     "device": "cuda",
-                    "batch_size": 8
+                    "batch_size": 8,
+                    "summarize_prefix": "summarize",
+                    "title_prefix": "title"
                 }
             }, 
             "run_kwargs": {
