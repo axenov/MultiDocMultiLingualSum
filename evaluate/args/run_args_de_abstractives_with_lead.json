@@ -24,8 +24,8 @@
                 "abstractive_args": {
                     "num_beams": 4,
                     "length_penalty": 2.0,
-                    "max_length": 400,
-                    "min_length": 150,
+                    "max_length": 500,
+                    "min_length": 200,
                     "no_repeat_ngram_size": 3,
                     "early_stopping": true
                 }
@@ -55,8 +55,8 @@
                 "abstractive_args": {
                     "num_beams": 4,
                     "length_penalty": 2.0,
-                    "max_length": 400,
-                    "min_length": 150,
+                    "max_length": 500,
+                    "min_length": 200,
                     "no_repeat_ngram_size": 3,
                     "early_stopping": true
                 }
@@ -87,8 +87,8 @@
                 "abstractive_args": {
                     "num_beams": 4,
                     "length_penalty": 2.0,
-                    "max_length": 400,
-                    "min_length": 150,
+                    "max_length": 500,
+                    "min_length": 200,
                     "no_repeat_ngram_size": 3,
                     "early_stopping": true
                 }
@@ -121,8 +121,8 @@
                     "title_column_name": "title",
                     "num_beams": 4,
                     "length_penalty": 2.0,
-                    "max_length": 400,
-                    "min_length": 150,
+                    "max_length": 500,
+                    "min_length": 200,
                     "no_repeat_ngram_size": 3,
                     "early_stopping": true
                 }

@@ -158,10 +158,15 @@ Run ``python evaluate/run_baseline.py --run_args_file "evaluate/args/run_args_en
 
 |     | rouge1 P |  rouge1 R | rouge1 F | rouge2 P |  rouge2 R | rouge2 F | rougeL P |  rougeL R | rougeL F |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Lead + Bart | 44.93% | 47.51% | 43.78% | 17.30% | 18.07% | 16.75% | 22.72% | 24.52% | 22.28% |
-| Lead + Bart-cnn | 46.48% | 46.19% | 43.92% | 18.54% | 18.05% | 17.35% | 24.48% | 24.47% | 23.16% |
-| Lead + T5 | 48.01% | 40.61% | 41.60% | 18.96% | 15.75% | 16.30% | 26.14% | 22.20% | 22.63% |
-| Lead + T5 with title | 47.90% | 40.09% | 41.30% | 18.65% | 15.18% | 15.86% | 25.80% | 21.69% | 22.27% |
+| Lead + Bart | 44.84% | 47.52% | 43.74% | 17.31% | 18.06% | 16.73% | 22.76% | 24.56% | 22.33% |
+| Lead + Bart-cnn | 46.49% | 46.20% | 43.93% | 18.55% | 18.06% | 17.35% | 24.46% | 24.49% | 23.12% |
+| Lead + T5 | 48.02% | 40.68% | 41.66% | 18.93% | 15.77% | 16.28% | 26.14% | 22.19% | 22.65% |
+| Lead + T5 with title | 49.07% | 40.56% | 41.95% | 19.32% | 15.71% | 16.35% | 26.77% | 22.31% | 22.92% |
+
+Run ``python evaluate/run_baseline.py --run_args_file "evaluate/args/run_args_combine_abstractives_with_lead_on_en.json"``
+
+|     | rouge1 P |  rouge1 R | rouge1 F | rouge2 P |  rouge2 R | rouge2 F | rougeL P |  rougeL R | rougeL F |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 
 ## Results for ``de-wiki-multi-news``
 
@@ -178,6 +183,21 @@ Run ``python evaluate/run_baseline.py --run_args_file "evaluate/args/run_args_de
 | TF-IDF | 33.13% | 40.35% | 33.77% | 9.75% | 12.29% | 10.05% | 14.58% | 18.57% | 15.12% |
 | Rouge Oracle | 44.57% | 46.50% | 41.78% | 20.88% | 20.57% | 19.04% | 19.02% | 20.48% | 18.08% |
 
+### Abstractives methods combined with Lead
+
+Run ``python evaluate/run_baseline.py --run_args_file "evaluate/args/run_args_fr_abstractives_with_lead.json"``
+
+|     | rouge1 P |  rouge1 R | rouge1 F | rouge2 P |  rouge2 R | rouge2 F | rougeL P |  rougeL R | rougeL F |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Lead + Bart | 45.42% | 26.90% | 31.39% | 13.59% | 8.09% | 9.39% | 23.00% | 13.93% | 16.02% |
+| Lead + T5 | 41.91% | 28.34% | 31.31% | 12.10% | 8.26% | 9.09% | 21.01% | 14.38% | 15.76% |
+| Lead + T5 with title | 42.19% | 28.70% | 31.60% | 12.52% | 8.63% | 9.43% | 21.25% | 14.70% | 16.03% |
+
+Run ``python evaluate/run_baseline.py --run_args_file "evaluate/args/run_args_combine_abstractives_with_lead_on_de.json"``
+
+|     | rouge1 P |  rouge1 R | rouge1 F | rouge2 P |  rouge2 R | rouge2 F | rougeL P |  rougeL R | rougeL F |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+
 ## Results for ``fr-wiki-multi-news``
 
 ### Extractives methods
@@ -192,3 +212,21 @@ Run ``python evaluate/run_baseline.py --run_args_file "evaluate/args/run_args_fr
 | TextRank | 23.36% | 48.41% | 28.70% | 8.70% | 18.73% | 10.85% | 11.77% | 26.57% | 14.86% |
 | TF-IDF | 26.03% | 48.39% | 30.22% | 9.65% | 19.21% | 11.52% | 13.26% | 27.29% | 15.99% |
 | Rouge Oracle | 25.75% | 56.34% | 31.69% | 12.42% | 26.55% | 15.06% | 12.31% | 30.16% | 15.71% |
+
+### Abstractives methods combined with Lead
+
+Run ``python evaluate/run_baseline.py --run_args_file "evaluate/args/run_args_fr_abstractives_with_lead.json"``
+
+|     | rouge1 P |  rouge1 R | rouge1 F | rouge2 P |  rouge2 R | rouge2 F | rougeL P |  rougeL R | rougeL F |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Lead + Bart | 44.79% | 41.61% | 37.83% | 18.69% | 18.76% | 16.06% | 25.71% | 25.85% | 22.25% |
+| Lead + T5 | 42.63% | 40.97% | 37.06% | 17.68% | 18.49% | 15.98% | 24.84% | 25.57% | 22.28% |
+| Lead + T5 with title | 41.80% | 43.74% | 37.27% | 17.45% | 20.27% | 16.00% | 24.17% | 27.70% | 22.21% |
+
+Run ``python evaluate/run_baseline.py --run_args_file "evaluate/args/run_args_combine_abstractives_with_lead_on_fr.json"``
+
+|     | rouge1 P |  rouge1 R | rouge1 F | rouge2 P |  rouge2 R | rouge2 F | rougeL P |  rougeL R | rougeL F |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Lead + Bart | 38.61% | 43.30% | 36.50% | 15.82% | 19.55% | 15.45% | 21.37% | 26.61% | 21.01% |
+| Lead + T5 with prefix in fr | 38.38% | 39.09% | 34.07% | 16.08% | 17.91% | 14.54% | 22.36% | 24.62% | 20.28% |
+| Lead + T5 with prefix in en | 40.85% | 37.90% | 35.53% | 18.18% | 17.59% | 16.34% | 24.57% | 24.05% | 22.04% |

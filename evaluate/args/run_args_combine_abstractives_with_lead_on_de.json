@@ -11,7 +11,7 @@
                 },
                 "abstractive_args": {
                     "name": "Bart",
-                    "model_name": "airKlizz/bart-large-multi-combine-wiki-news",
+                    "model_name": ["facebook/bart-large", "airKlizz/bart-large-multi-combine-wiki-news"],
                     "input_max_length": 1024,
                     "device": "cuda",
                     "batch_size": 8
@@ -24,8 +24,8 @@
                 "abstractive_args": {
                     "num_beams": 4,
                     "length_penalty": 2.0,
-                    "max_length": 400,
-                    "min_length": 150,
+                    "max_length": 500,
+                    "min_length": 200,
                     "no_repeat_ngram_size": 3,
                     "early_stopping": true
                 }
@@ -56,8 +56,8 @@
                 "abstractive_args": {
                     "num_beams": 4,
                     "length_penalty": 2.0,
-                    "max_length": 400,
-                    "min_length": 150,
+                    "max_length": 500,
+                    "min_length": 200,
                     "no_repeat_ngram_size": 3,
                     "early_stopping": true
                 }
