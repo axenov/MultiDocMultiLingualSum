@@ -65,37 +65,6 @@
         {
             "baseline_class": "Combine", 
             "init_kwargs": {
-                "name": "Lead + Bart-cnn",
-                "extractive_class": "Lead",
-                "abstractive_class": "Bart",
-                "extractive_args": {
-                    "name": "Lead"
-                },
-                "abstractive_args": {
-                    "name": "Bart-cnn",
-                    "model_name": "airKlizz/bart-large-cnn-multi-de-wiki-news",
-                    "input_max_length": 1024,
-                    "device": "cuda",
-                    "batch_size": 8
-                }
-            }, 
-            "run_kwargs": {
-                "extractive_args": {
-                    "num_sentences": null
-                },
-                "abstractive_args": {
-                    "num_beams": 4,
-                    "length_penalty": 2.0,
-                    "max_length": 400,
-                    "min_length": 150,
-                    "no_repeat_ngram_size": 3,
-                    "early_stopping": true
-                }
-            }
-        },
-        {
-            "baseline_class": "Combine", 
-            "init_kwargs": {
                 "name": "Lead + T5",
                 "extractive_class": "Lead",
                 "abstractive_class": "T5",
