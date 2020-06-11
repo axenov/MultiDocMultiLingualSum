@@ -17,7 +17,7 @@ class Bart(Baseline):
         if isinstance(model_name, str):
             model_name = [model_name, model_name]
         self.tokenizer = BartTokenizer.from_pretrained(model_name[0])
-        self.model = BartForConditionalGeneration.from_pretrained(model_name[1])
+        self.model = BartForConditionalGeneration.from_pretrained(model_name[1]).eval()
         self.input_max_length = input_max_length
         self.device = device
         self.batch_size = batch_size

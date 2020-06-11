@@ -17,7 +17,7 @@ class T5(Baseline):
         if isinstance(model_name, str):
             model_name = [model_name, model_name]
         self.tokenizer = T5Tokenizer.from_pretrained(model_name[0])
-        self.model = T5ForConditionalGeneration.from_pretrained(model_name[1])
+        self.model = T5ForConditionalGeneration.from_pretrained(model_name[1]).eval()
         self.input_max_length = input_max_length
         self.device = device
         self.batch_size = batch_size
