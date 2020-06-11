@@ -197,6 +197,8 @@ Run ``python evaluate/run_baseline.py --run_args_file "evaluate/args/run_args_co
 
 |     | rouge1 P |  rouge1 R | rouge1 F | rouge2 P |  rouge2 R | rouge2 F | rougeL P |  rougeL R | rougeL F |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Lead + Bart | 43.63% | 28.13% | 31.79% | 13.01% | 8.45% | 9.49% | 21.85% | 14.38% | 16.09% |
+| Lead + T5 | 41.57% | 28.90% | 31.52% | 12.30% | 8.59% | 9.37% | 20.83% | 14.72% | 15.91% |
 
 ## Results for ``fr-wiki-multi-news``
 

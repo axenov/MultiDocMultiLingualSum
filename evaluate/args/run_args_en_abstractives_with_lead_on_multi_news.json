@@ -14,7 +14,7 @@
                     "model_name": "airKlizz/bart-large-multi-en-wiki-news",
                     "input_max_length": 1024,
                     "device": "cuda",
-                    "batch_size": 8
+                    "batch_size": 32
                 }
             }, 
             "run_kwargs": {
@@ -45,7 +45,7 @@
                     "model_name": "airKlizz/bart-large-cnn-multi-en-wiki-news",
                     "input_max_length": 1024,
                     "device": "cuda",
-                    "batch_size": 8
+                    "batch_size": 32
                 }
             }, 
             "run_kwargs": {
@@ -76,7 +76,7 @@
                     "model_name": "airKlizz/t5-base-multi-en-wiki-news",
                     "input_max_length": 512,
                     "device": "cuda",
-                    "batch_size": 8,
+                    "batch_size": 32,
                     "summarize_prefix": "summarize"
                 }
             }, 
