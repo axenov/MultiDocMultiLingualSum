@@ -170,6 +170,24 @@ Run ``python evaluate/run_baseline.py --run_args_file "evaluate/args/run_args_co
 | Lead + Bart | 44.46% | 47.42% | 43.59% | 17.04% | 17.86% | 16.54% | 22.55% | 24.48% | 22.24% |
 | Lead + T5 | 48.41% | 39.33% | 41.04% | 18.72% | 14.82% | 15.67% | 26.02% | 21.30% | 22.11% |
 
+### Abstractives methods combined with Oracle
+
+Run ``python evaluate/run_baseline.py --run_args_file "evaluate/args/run_args_en_abstractives_with_oracle.json"``
+
+|     | rouge1 P |  rouge1 R | rouge1 F | rouge2 P |  rouge2 R | rouge2 F | rougeL P |  rougeL R | rougeL F |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| RougeOracle + Bart | 47.32% | 49.52% | 45.98% | 20.61% | 20.75% | 19.61% | 24.71% | 26.24% | 24.11% |
+| RougeOracle + Bart-cnn | 48.67% | 47.83% | 45.75% | 21.42% | 20.27% | 19.69% | 25.84% | 25.62% | 24.30% |
+| RougeOracle + T5 | 54.84% | 44.81% | 46.66% | 27.20% | 20.99% | 22.42% | 30.34% | 24.67% | 25.69% |
+| RougeOracle + T5 with title | 56.13% | 44.37% | 46.94% | 27.99% | 20.79% | 22.58% | 31.78% | 24.78% | 26.25% |
+
+Run ``python evaluate/run_baseline.py --run_args_file "evaluate/args/run_args_combine_abstractives_with_oracle_on_en.json"``
+
+|     | rouge1 P |  rouge1 R | rouge1 F | rouge2 P |  rouge2 R | rouge2 F | rougeL P |  rougeL R | rougeL F |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Lead + Bart | 44.46% | 47.42% | 43.59% | 17.04% | 17.86% | 16.54% | 22.55% | 24.48% | 22.24% |
+| Lead + T5 | 48.41% | 39.33% | 41.04% | 18.72% | 14.82% | 15.67% | 26.02% | 21.30% | 22.11% |
+
 ## Results for ``de-wiki-multi-news``
 
 ### Extractives methods
