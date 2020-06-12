@@ -76,7 +76,7 @@
                     "model_name": "airKlizz/t5-base-multi-en-wiki-news",
                     "input_max_length": 512,
                     "device": "cuda",
-                    "batch_size": 32,
+                    "batch_size": 16,
                     "summarize_prefix": "summarize"
                 }
             }, 
@@ -105,9 +105,9 @@
     },
 
     "run": {
-        "hypotheses_folder": "evaluate/results/en_abstractives_with_lead_hypotheses/",
-        "csv_file": "evaluate/results/en_abstractives_with_lead_results.csv",
-        "md_file": "evaluate/results/en_abstractives_with_lead_results.md",
+        "hypotheses_folder": "evaluate/results/en_abstractives_with_lead_hypotheses_on_multi_news/",
+        "csv_file": "evaluate/results/en_abstractives_with_lead_results_on_multi_news.csv",
+        "md_file": "evaluate/results/en_abstractives_with_lead_results_on_multi_news.md",
         "rouge_types": {
             "rouge1": ["mid.precision", "mid.recall", "mid.fmeasure"],
             "rouge2": ["mid.precision", "mid.recall", "mid.fmeasure"],

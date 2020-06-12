@@ -167,6 +167,8 @@ Run ``python evaluate/run_baseline.py --run_args_file "evaluate/args/run_args_co
 
 |     | rouge1 P |  rouge1 R | rouge1 F | rouge2 P |  rouge2 R | rouge2 F | rougeL P |  rougeL R | rougeL F |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Lead + Bart | 44.46% | 47.42% | 43.59% | 17.04% | 17.86% | 16.54% | 22.55% | 24.48% | 22.24% |
+| Lead + T5 | 48.41% | 39.33% | 41.04% | 18.72% | 14.82% | 15.67% | 26.02% | 21.30% | 22.11% |
 
 ## Results for ``de-wiki-multi-news``
 
@@ -232,3 +234,13 @@ Run ``python evaluate/run_baseline.py --run_args_file "evaluate/args/run_args_co
 | Lead + Bart | 38.61% | 43.30% | 36.50% | 15.82% | 19.55% | 15.45% | 21.37% | 26.61% | 21.01% |
 | Lead + T5 with prefix in fr | 38.38% | 39.09% | 34.07% | 16.08% | 17.91% | 14.54% | 22.36% | 24.62% | 20.28% |
 | Lead + T5 with prefix in en | 40.85% | 37.90% | 35.53% | 18.18% | 17.59% | 16.34% | 24.57% | 24.05% | 22.04% |
+
+## Results for ``multi-news``
+
+### Abstractives methods combined with Lead
+
+Run ``python evaluate/run_baseline.py --run_args_file "evaluate/args/run_args_en_abstractives_with_lead_on_multi_news.json"``
+
+|     | rouge1 P |  rouge1 R | rouge1 F | rouge2 P |  rouge2 R | rouge2 F | rougeL P |  rougeL R | rougeL F |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Lead + Bart-cnn | 42.32% | 47.39% | 43.61% | 15.08% | 17.08% | 15.63% | 20.91% | 23.77% | 21.68% |
