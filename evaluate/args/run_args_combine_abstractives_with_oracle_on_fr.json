@@ -19,7 +19,8 @@
             }, 
             "run_kwargs": {
                 "extractive_args": {
-                    "num_sentences": null
+                    "num_sentences": null,
+                    "run_summary_colunm_name": "clean_summary"
                 },
                 "abstractive_args": {
                     "num_beams": 4,
@@ -51,7 +52,8 @@
             }, 
             "run_kwargs": {
                 "extractive_args": {
-                    "num_sentences": null
+                    "num_sentences": null,
+                    "run_summary_colunm_name": "clean_summary"
                 },
                 "abstractive_args": {
                     "num_beams": 4,
