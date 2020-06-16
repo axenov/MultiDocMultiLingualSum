@@ -13,6 +13,7 @@ class Baseline(object):
         A Baseline is the base class for all baselines.
         """
         self.name = name.replace(" ", "-").lower()
+        np.random.seed(42)
 
     def rank_sentences(self, dataset, document_column_name, **kwargs):
         """
