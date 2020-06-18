@@ -1,9 +1,8 @@
 import numpy as np
-from tqdm import tqdm
-
-from sumy.parsers.plaintext import PlaintextParser
-from sumy.nlp.tokenizers import Tokenizer
-from sumy.summarizers.lex_rank import LexRankSummarizer
+from nltk.tokenize import sent_tokenize
+from scipy.sparse.csgraph import connected_components
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 from baselines.baseline import Baseline
 
@@ -18,18 +17,13 @@ class LexRank(Baseline):
     """
 
     """ Implementation
-    Wrapper of https://github.com/miso-belica/sumy
+    PageRank function from: https://medium.com/analytics-vidhya/sentence-extraction-using-textrank-algorithm-7f5c8fd568cd
     """
-
-    def __init__(self, name, language):
-        super().__init__(name)
-        self.language = language
-        self.summarizer = LexRankSummarizer()
 
     def rank_sentences(self, dataset, document_column_name, **kwargs):
         all_sentences = []
         all_scores = []
-        for document in tqdm(dataset[document_column_name]):
+        for document in dataset[document_column_name]:
             sentences, scores = self.run_single(document)
             all_sentences.append(sentences)
             all_scores.append(scores)
@@ -41,19 +35,36 @@ class LexRank(Baseline):
         return Baseline.append_column(dataset, data, self.name)
 
     def run_single(self, document):
-        parser = PlaintextParser.from_string(document, Tokenizer(self.language))
-        document = parser.document
 
-        self.summarizer._ensure_dependencies_installed()
+        sentences = sent_tokenize(document)
 
-        sentences_words = [self.summarizer._to_words_set(s) for s in document.sentences]
-        if not sentences_words:
-            return tuple()
+        # Run tf-idf cosine similarity
+        vectorizer = TfidfVectorizer()
+        documents_vector = vectorizer.fit_transform(sentences)
+        similarity_matrix = cosine_similarity(documents_vector)
 
-        tf_metrics = self.summarizer._compute_tf(sentences_words)
-        idf_metrics = self.summarizer._compute_idf(sentences_words)
+        # Run PageRank
+        scores = self._run_page_rank(similarity_matrix)
 
-        matrix = self.summarizer._create_matrix(sentences_words, self.summarizer.threshold, tf_metrics, idf_metrics)
-        scores = self.summarizer.power_method(matrix, self.summarizer.epsilon)
+        return sentences, list(scores)
 
-        return list(map(str, document.sentences)), list(scores)
+    def _run_page_rank(self, similarity_matrix):
+        # constants
+        damping = 0.85  # damping coefficient, usually is .85
+        min_diff = 1e-5  # convergence threshold
+        steps = 100  # iteration steps
+
+        pr_vector = np.array([1] * len(similarity_matrix))
+
+        # Iteration
+        previous_pr = 0
+        for epoch in range(steps):
+            pr_vector = (1 - damping) + damping * np.matmul(
+                similarity_matrix, pr_vector
+            )
+            if abs(previous_pr - sum(pr_vector)) < min_diff:
+                break
+            else:
+                previous_pr = sum(pr_vector)
+
+        return pr_vector

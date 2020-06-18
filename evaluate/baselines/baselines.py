@@ -2,6 +2,8 @@ from baselines.random import Random
 from baselines.lead import Lead
 from baselines.lexrank import LexRank
 from baselines.textrank import TextRank
+from baselines.lexrank_sumy import LexRankSumy
+from baselines.textrank_sumy import TextRankSumy
 from baselines.tfidf import TFIDF
 from baselines.rouge_oracle import RougeOracle
 from baselines.bert2bert import Bert2Bert
@@ -20,6 +22,10 @@ def use(baseline_class, **init_kwargs):
         return LexRank(**init_kwargs)
     if baseline_class == "TextRank":
         return TextRank(**init_kwargs)
+    if baseline_class == "LexRankSumy":
+        return LexRankSumy(**init_kwargs)
+    if baseline_class == "TextRankSumy":
+        return TextRankSumy(**init_kwargs)
     if baseline_class == "TFIDF":
         return TFIDF(**init_kwargs)
     if baseline_class == "RougeOracle":
