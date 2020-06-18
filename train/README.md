@@ -1,5 +1,7 @@
 # Training of summarization models
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/15mhkhI7sNATanwGHqmh9ZO69AngAUg37?usp=sharing)
+
 Models are trained on Multi-en-Wiki-News by default but this can be changed by changing the training parameters.
 
 All the training scripts are in the folder ``scripts/`` and all the training parameters are in the folder ``args/``.
