@@ -32,6 +32,36 @@ Training models are available as HugginFace models [here](https://huggingface.co
 
 Implementation code and training scripts are in the [``train``](/train) folder.
 
+For example, you can use BART fine-tuned on Multi-en-Wiki-News as follow:
+
+```python
+from transformers import AutoTokenizer, AutoModelWithLMHead
+
+# Load tokenizer
+tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large")
+
+# Load model
+model = AutoModelWithLMHead.from_pretrained("airKlizz/bart-large-multi-en-wiki-news")
+
+# Prepare inputs
+inputs = tokenizer.encode_plus(TEXT_TO_SUMMARIZE, max_length=1024, return_tensors="pt")
+
+# Summarize
+outputs = model.generate(
+  input_ids=inputs['input_ids'], 
+  attention_mask=inputs['attention_mask'], 
+  max_length=400, 
+  min_length=150, 
+  length_penalty=2.0, 
+  num_beams=4, 
+  early_stopping=True
+)
+
+# Decode
+summary = tokenizer.decode(outputs[0], skip_special_tokens=True, clean_up_tokenization_spaces=False)
+print(summary)
+```
+
 ## Results
 
 All extractive and abstractive models implementations and evaluation scripts are in the [``evaluate``](/evaluate) folder.
