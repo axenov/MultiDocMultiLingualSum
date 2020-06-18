@@ -1,10 +1,20 @@
 # Multi-Document Multi-Lingual Summarization
 
-## Load dataset
+Code to reproduce data, models and results of the paper **Multi-Language Multi-Document Summarization**.
 
-See ``dataset/README.md`` for more details. 
+## Multi-Wiki-News
 
-Load the dataset using [huggingface nlp library](https://github.com/huggingface/nlp):
+### Reproduce the dataset
+
+All the code to create Multi-Wiki-News and reproduce stats and explaination are in the [``dataset``](/dataset) folder.
+
+### Load the dataset
+
+Raw data of each version of the dataset are available [here](https://drive.google.com/drive/folders/1805OtY_T0lVL3xCSGPvBdQpAkvIl6eO4?usp=sharing).
+
+You can also load the dataset with the [HuggingFace nlp library](https://github.com/huggingface/nlp) using ``en_wiki_multi_news.py`` for the English version, ``de_wiki_multi_news.py`` for the German version or ``fr_wiki_multi_news.py`` for the French one.
+
+For load the Multi-en-Wiki-News, run:
 
 ```python
 from nlp import load_dataset
@@ -15,6 +25,20 @@ train_dataset = dataset['train']
 validation_dataset = dataset['validation']
 test_dataset = dataset['test']
 ```
+
+## Models
+
+Training models are available as HugginFace models [here](https://huggingface.co/models?search=airKlizz).
+
+Implementation code and training scripts are in the [``train``](/train) folder.
+
+## Results
+
+All extractive and abstractive models implementations and evaluation scripts are in the [``evaluate``](/evaluate) folder.
+
+We create an summarization evaluation environement easy to use for all models and all datasets. You can find more details in the [``evaluate``](/evaluate) folder.
+
+<!---
 
 ## Related Work
 
@@ -61,3 +85,5 @@ Use BERT as encoder and a non-trained decoder. Two optimizers to avoid overfitti
 
 * [EASY-M: Evaluation System for Multilingual Summarizers](https://www.aclweb.org/anthology/W19-89.pdf#page=63) | [web](https://summaryevaluation.azurewebsites.net/home)\
 Online system that evaluate summaries with many metrics. Can be use to compare with our metrics.
+
+--->
