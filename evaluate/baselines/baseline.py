@@ -8,6 +8,7 @@ import pyarrow as pa
 
 
 class Baseline(object):
+
     def __init__(self, name):
         """ 
         A Baseline is the base class for all baselines.
@@ -27,18 +28,37 @@ class Baseline(object):
 
         raise NotImplementedError()
 
-    def get_summaries(self, dataset, document_column_name, **kwargs):
+    def get_summaries(
+        self,
+        dataset,
+        document_column_name,
+        num_sentences,
+        non_redundant=False,
+        rouge_type="rouge2",
+        rouge_method="recall",
+        redundance_threshold = 0.05,
+        ordering=False,
+        **kwargs,
+    ):
         """
         Get the summary of each documents.
         Args:
             dataset (nlp.Dataset): dataset containing document to summarize
             document_column_name (str): name of the column of the dataset containing documents
+            num_sentences (int or list): number of sentences in the summaries or list of number of sentences in the summaries
+            non_redundant (bool): apply non redundant 
+            rouge_type (str): type of rouge to use if non_redundant
+            rouge_method (str): method of rouge to use if non_redundant
+            redundance_threshold (float): redundance threshold if non_redundant
+            ordering (bool): apply ordering
             **kwargs: arguments to pass to the run function
         Return:
             dataset (nlp.Dataset): dataset with a new column for hypothesis
         """
         dataset = self.rank_sentences(dataset, document_column_name, **kwargs)
-        num_sentences = kwargs["num_sentences"]
+
+        if non_redundant:
+            self._init_rouge(rouge_type, rouge_method)
 
         if isinstance(num_sentences, int) or num_sentences == None:
             num_sentences = [num_sentences for i in range(len(dataset))]
@@ -51,9 +71,33 @@ class Baseline(object):
             scores = np.array(example[self.name]["scores"])
             sentences = example[self.name]["sentences"]
             sorted_ix = np.argsort(scores)[::-1]
-            hyp = " ".join(
-                [sentences[j] for j in sorted_ix[: example["num_sentences"]]]
-            )
+
+            if non_redundant:
+                sorted_ix_non_redundant = []
+                redundance_score = 0
+                for k in sorted_ix:
+                    redundance_score = self._calculate_rouge(
+                        sentences[k],
+                        " ".join([sentences[i] for i in sorted_ix_non_redundant]),
+                    )
+                    if redundance_score < redundance_threshold:
+                        sorted_ix_non_redundant.append(k)
+                    if len(sorted_ix_non_redundant) >= example["num_sentences"]:
+                        break
+                sorted_ix = sorted_ix_non_redundant
+
+            if ordering:
+                summary_sentences = [sentences[j] for j in sorted_ix[:example["num_sentences"]]]
+                hyp = ""
+                for sentence in sentences:
+                    if sentence in summary_sentences:
+                        hyp += sentence + " "
+            
+            else:
+                hyp = " ".join(
+                    [sentences[j] for j in sorted_ix[:example["num_sentences"]]]
+                )
+            
             example[f"{self.name}_hypothesis"] = hyp
             return example
 
@@ -92,6 +136,28 @@ class Baseline(object):
 
         dataset.map(compute_rouge_batch, batched=True)
         return dataset, rouge_metric.compute(rouge_types=rouge_types)
+
+    def _init_rouge(self, rouge_type, rouge_method):
+        self.rouge_metric = load_metric("rouge")
+        self.rouge_type = rouge_type
+        if rouge_method == "precision":
+            self.rouge_method = 0
+        elif rouge_method == "recall":
+            self.rouge_method = 1
+        elif rouge_method == "fmeasure":
+            self.rouge_method = 2
+        else:
+            raise ValueError('rouge_method must be "precision", "recall" or "fmeasure"')
+
+    def _calculate_rouge(self, prediction, reference):
+        score = self.rouge_metric.compute(
+            [prediction],
+            [reference],
+            rouge_types=[self.rouge_type],
+            use_agregator=False,
+        )
+        value = score[self.rouge_type][0][self.rouge_method]
+        return value
 
     @staticmethod
     def append_column(dataset, data, column_name):

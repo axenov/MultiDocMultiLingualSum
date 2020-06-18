@@ -28,3 +28,5 @@ extractive/*
 apply_extractive.py
 
 wandb/*
+
+test.json
