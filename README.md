@@ -68,6 +68,12 @@ All extractive and abstractive models implementations and evaluation scripts are
 
 We create an summarization evaluation environement easy to use for all models and all datasets. You can find more details in the [``evaluate``](/evaluate) folder.
 
+## Demo
+
+![](https://media.giphy.com/media/YMvQtN4pDVunmHvaOl/giphy.gif)
+
+A demo will be available soon.
+
 <!---
 
 ## Related Work
