@@ -70,7 +70,7 @@ We create an summarization evaluation environement easy to use for all models an
 
 ## Demo
 
-![](https://media.giphy.com/media/YMvQtN4pDVunmHvaOl/giphy.gif)
+![](demo/demo.gif)
 
 A demo will be available soon.
 
