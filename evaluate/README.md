@@ -52,48 +52,11 @@ This is an example of a ``run_args.json`` file:
     "baselines": [
         {"baseline_class": "Random", "init_kwargs": {"name": "Random"}, "run_kwargs": {"num_sentences": 10}},
         {"baseline_class": "Lead", "init_kwargs": {"name": "Lead"}, "run_kwargs": {"num_sentences": 10}},
-        {"baseline_class": "LexRank", "init_kwargs": {"name": "LexRank"}, "run_kwargs": {"num_sentences": 10, "threshold": 0.03, "increase_power": true}},
         {
             "baseline_class": "Bart", 
             "init_kwargs": {
                 "name": "Bart CNN",
                 "model_name": "bart-large-cnn",
-                "input_max_length": 512,
-                "device": "cuda",
-                "batch_size": 8
-            }, 
-            "run_kwargs": {
-                "num_beams": 4,
-                "length_penalty": 2.0,
-                "max_length": 400,
-                "min_length": 200,
-                "no_repeat_ngram_size": 3,
-                "early_stopping": true
-            }
-        },
-        {
-            "baseline_class": "T5", 
-            "init_kwargs": {
-                "name": "T5 base",
-                "model_name": "t5-base",
-                "input_max_length": 512,
-                "device": "cuda",
-                "batch_size": 8
-            }, 
-            "run_kwargs": {
-                "num_beams": 4,
-                "length_penalty": 2.0,
-                "max_length": 400,
-                "min_length": 200,
-                "no_repeat_ngram_size": 3,
-                "early_stopping": true
-            }
-        },
-        {
-            "baseline_class": "T5", 
-            "init_kwargs": {
-                "name": "T5 fine tuned",
-                "model_name": ["t5-base", "/content/drive/My Drive/Colab Notebooks/Multi-wiki-news/English/t5-wild-glitter-2"],
                 "input_max_length": 512,
                 "device": "cuda",
                 "batch_size": 8
