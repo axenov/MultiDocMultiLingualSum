@@ -6,13 +6,13 @@ parser.add_argument(
     "--dataset_script_path",
     help="Path to the dataset script",
     type=str,
-    default="./de_wiki_multi_news.py",
+    default="./en_wiki_multi_news.py",
 )
 parser.add_argument(
     "--dataset_cache_path",
     help="Path to the cache folder",
     type=str,
-    default="dataset/.de-wiki-multi-news-cache",
+    default="dataset/.en-wiki-multi-news-cache",
 )
 parser.add_argument(
     "--rouge",

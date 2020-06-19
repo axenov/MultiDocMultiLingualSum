@@ -107,6 +107,54 @@ The easiest way to use the dataset is to load it using the [nlp](https://github.
 
 ### English dataset
 
+The dataset contains 8661 examples.
+number of article with:
+ - 1 source: 1588
+ - 2 sources: 3199
+ - 3 sources: 2211
+ - 4 sources: 966
+ - more sources: 699
+number of words in document:    1501.2223248297357
+number of sentences in document:        57.31109315479626
+number of words in summary:     307.82615722036246
+number of sentences in summary: 12.466466582015467
+
+Rouge-1 R:      0.7746565605242417
+Rouge-2 R:      0.38600286300678843
+Rouge-L R:      0.43244206183529077
+
 ### German dataset
 
+The dataset contains 4540 examples.
+number of article with:
+ - 1 source: 1261
+ - 2 sources: 1738
+ - 3 sources: 906
+ - 4 sources: 398
+ - more sources: 239
+number of words in document:    1205.844561867019
+number of sentences in document:        61.244605900484366
+number of words in summary:     239.36195508586525
+number of sentences in summary: 12.560766182298547
+
+Rouge-1 R:      0.682878927456346
+Rouge-2 R:      0.2683286082693972
+Rouge-L R:      0.3449110113792242
+
 ### French dataset
+
+The dataset contains 4850 examples.
+number of article with:
+ - 1 source: 3056
+ - 2 sources: 1056
+ - 3 sources: 417
+ - 4 sources: 163
+ - more sources: 160
+number of words in document:    1022.757625721352
+number of sentences in document:        31.441879637262986
+number of words in summary:     196.77411376751854
+number of sentences in summary: 7.562036273701566
+
+Rouge-1 R:      0.6341904962677538
+Rouge-2 R:      0.2913574878897698
+Rouge-L R:      0.38203942115026757
