@@ -123,6 +123,7 @@ Run ``python evaluate/run_baseline.py --run_args_file "evaluate/args/run_args_en
 
 |     | rouge1 P |  rouge1 R | rouge1 F | rouge2 P |  rouge2 R | rouge2 F | rougeL P |  rougeL R | rougeL F |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Lead + Bert2Bert | 27.80% | 35.80% | 29.45% | 6.06% | 7.79% | 6.40% | 14.25% | 19.27% | 15.39% |
 | Lead + Bart | 44.84% | 47.52% | 43.74% | 17.31% | 18.06% | 16.73% | 22.76% | 24.56% | 22.33% |
 | Lead + Bart-cnn | 46.49% | 46.20% | 43.93% | 18.55% | 18.06% | 17.35% | 24.46% | 24.49% | 23.12% |
 | Lead + T5 | 48.02% | 40.68% | 41.66% | 18.93% | 15.77% | 16.28% | 26.14% | 22.19% | 22.65% |
@@ -176,9 +177,11 @@ Run ``python evaluate/run_baseline.py --run_args_file "evaluate/args/run_args_fr
 
 |     | rouge1 P |  rouge1 R | rouge1 F | rouge2 P |  rouge2 R | rouge2 F | rougeL P |  rougeL R | rougeL F |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Lead + Bert2Bert | 20.13% | 29.00% | 22.00% | 3.12% | 4.56% | 3.41% | 10.12% | 15.50% | 11.30% |
 | Lead + Bart | 45.42% | 26.90% | 31.39% | 13.59% | 8.09% | 9.39% | 23.00% | 13.93% | 16.02% |
 | Lead + T5 | 41.91% | 28.34% | 31.31% | 12.10% | 8.26% | 9.09% | 21.01% | 14.38% | 15.76% |
 | Lead + T5 with title | 42.19% | 28.70% | 31.60% | 12.52% | 8.63% | 9.43% | 21.25% | 14.70% | 16.03% |
+
 
 Run ``python evaluate/run_baseline.py --run_args_file "evaluate/args/run_args_combine_abstractives_with_lead_on_de.json"``
 
